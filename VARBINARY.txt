@@ -1,0 +1,12 @@
+insert into login(IdUsuario, contrasenia) values(‘buhoos’,PWDENCRYPT(‘12345678’))
+select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
+
+
+update Tabla
+set Audio=(select * FROM OPENROWSET(BULK 'C:\Audio.mp3', SINGLE_BLOB) AS T)
+where Id = 12345
+
+
+INSERT INTO [dbo].[IMAGEN](PIN,IMAGEN)
+
+(SELECT '' AS PIN, * FROM OPENROWSET(BULK N'C:\IMG\IMG01.JPG', SINGLE_BLOB) AS IMAGEN)
