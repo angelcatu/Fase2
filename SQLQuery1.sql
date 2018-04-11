@@ -8,14 +8,26 @@ NombreCompleto VARCHAR(50) NOT NULL,
 FechaNacimiento DATE NOT NULL,
 CorreoElectronico VARCHAR(50) NOT NULL, 
 Username VARCHAR(20) NOT NULL,
-Contraseña [VARBINARY](MAX) NOT NULL
+Contraseña VARCHAR(50) NOT NULL,
 
 );
 
 SELECT * FROM Usuario;
 insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Username, Contraseña) 
-values('Angel', '1994-07-24', 'angel@gmail.com','Administrador',PWDENCRYPT('IPC2'));
+values('Angel', '1994-07-24', 'angel@gmail.com','Administrador', 'IPC2');
 
+Delete from Usuario where IdUsuario = 4;
+
+select Contraseña from Usuario where Username ='Administrador' and PWDCOMPARE('IPC2', Contraseña)= 1
+Select Contraseña from Usuario where Username = 'Administrador';
+
+drop table Usuario;
+drop table Artista;
+drop table Album;
+drop table Cancion;
+drop table Cancion_Lista;
+drop table Artista_Genero;
+drop table Lista;
 
 
 CREATE TABLE Estado(
@@ -165,3 +177,5 @@ INSERT INTO Nacionalidad (Pais) VALUES('Uruguay');
 INSERT INTO Nacionalidad (Pais) VALUES('Venezuela');
 
 
+
+SELECT Contraseña FROM Usuario Where IdUsuario = 1;
