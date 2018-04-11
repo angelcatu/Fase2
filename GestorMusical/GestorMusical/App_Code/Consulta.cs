@@ -50,30 +50,34 @@ using System.Data.SqlClient;
             }
         }
 
-    public void registrarUsuario(String nombre, String nacimiento, String correo, String usuario, String password)
+    public void registrarUsuario(String nombre, String nacimiento, String correo, String usuario, String password, String estado)
     {
         SqlConnection connection = Conexion.conectar();
+        String rol = "Consulta";
 
         try
         {
             connection.Open();
 
-            String query = "INSERT INTO Usuario (NombreCompleto, FechaNacimiento, CorreoElectronico, Username, Contraseña) " +
-                "VALUES (@nombre, @nacimiento, @correo, @usuario, @password)";
+            String query = "INSERT INTO Usuario (NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK) " +
+                "VALUES (@nombre, @nacimiento, @correo, @rol , @usuario, @password, @estado)";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@nombre", nombre);
             command.Parameters.AddWithValue("@nacimiento", nacimiento);
             command.Parameters.AddWithValue("@correo", correo);
+            command.Parameters.AddWithValue("@rol", rol);
             command.Parameters.AddWithValue("@usuario", usuario);
             command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@estado", estado);
 
 
             try
             {
                 command.ExecuteNonQuery();
                 connection.Close();
+
 
             }
             catch (Exception e)

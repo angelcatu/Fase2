@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Administrador.aspx.cs" Inherits="Vista_Administrador" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="consultarArtista.aspx.cs" Inherits="Vista_Administrar_consultarArtista" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <link href="Estilo/estiloNav.css" rel="stylesheet" />
+    <link href="../Estilo/estiloNav.css" rel="stylesheet" />
     <title>Administrador</title>
     <style type="text/css">
         .auto-style3 {
@@ -25,21 +25,21 @@
             <li class="nivel1"><a href="#">Inicio</a></li>
             <li class="nivel1"><a href="#">Gestionar</a>
                 <ul>
-                    <li class="nivel2"><a href="Administrar/crearUsuario.aspx">Crear usuario</a> </li>
-                    <li class="nivel2"><a href="Administrar/modificarUsuario.aspx">Modificar usuario</a></li>                    
+                    <li class="nivel2"><a href="crearUsuario.aspx">Crear usuario</a> </li>
+                    <li class="nivel2"><a href="modificarUsuario.aspx">Modificar usuario</a></li>                    
                 </ul>                            
             </li>                
             <li class="nivel1"><a href="#">Consultas</a>
                 <ul>
-                    <li class="nivel2"><a href="Administrar/consultarUsuario.aspx">Consultar usuario</a></li>
-                    <li class="nivel2"><a href="Administrar/consultarAlbum.aspx">Consultar álbumes</a></li>
-                    <li class="nivel2"><a href="Administrar/consultarArtista.aspx">Consultar artistas</a></li>
+                    <li class="nivel2"><a href="consultarUsuario.aspx">Consultar usuario</a></li>
+                    <li class="nivel2"><a href="consultarAlbum.aspx">Consultar álbumes</a></li>
+                    <li class="nivel2"><a href="consultarArtista.aspx">Consultar artistas</a></li>
                 </ul>   
             </li>                
 
             <li class="nivel1"><a href="#">Genero</a>
                 <ul>
-                    <li class="nivel2"><a href="Administrar/crearGenero.aspx">Crear género</a></li>
+                    <li class="nivel2"><a href="crearGenero.aspx">Crear género</a></li>
                 </ul>
             </li>
             <li>
@@ -57,4 +57,5 @@
         
 </body>
 </html>
+
 

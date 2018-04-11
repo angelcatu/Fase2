@@ -7,19 +7,28 @@ IdUsuario INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 NombreCompleto VARCHAR(50) NOT NULL,
 FechaNacimiento DATE NOT NULL,
 CorreoElectronico VARCHAR(50) NOT NULL, 
+Rol VARCHAR(20) NOT NULL,
 Username VARCHAR(20) NOT NULL,
 Contraseña VARCHAR(50) NOT NULL,
+
+Estado_FK INT NOT NULL,
+CONSTRAINT IdEstadoUsuario_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado),
 
 );
 
 SELECT * FROM Usuario;
-insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Username, Contraseña) 
-values('Angel', '1994-07-24', 'angel@gmail.com','Administrador', 'IPC2');
+insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK) 
+values('Angel', '1994-07-24', 'angel@gmail.com', 'Administrador', 'Administrador', 'IPC2', 1);
+
+
+SELECT Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado
+GROUP BY Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion;
+
+
+Select * from Estado;
 
 Delete from Usuario where IdUsuario = 4;
 
-select Contraseña from Usuario where Username ='Administrador' and PWDCOMPARE('IPC2', Contraseña)= 1
-Select Contraseña from Usuario where Username = 'Administrador';
 
 drop table Usuario;
 drop table Artista;

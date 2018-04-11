@@ -17,6 +17,8 @@ header {
 #menuTop {
     position: absolute;
     bottom: 0;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
     width: 1000px;
     height: 50px;
 }
@@ -61,4 +63,9 @@ header {
 
 #menuTop ul li:hover ul {
     display: block;
+}
+
+#grid {
+    margin-left: 400px;
+    margin-top: 20px;
 }
