@@ -26,7 +26,7 @@
             <li class="nivel1"><a href="#">Gestionar</a>
                 <ul>
                     <li class="nivel2"><a href="Administrar/crearUsuario.aspx">Crear usuario</a> </li>
-                    <li class="nivel2"><a href="Administrar/modificarUsuario.aspx">Modificar usuario</a></li>                    
+                    <li class="nivel2"><a href="Administrar/buscarUsuario.aspx">Modificar usuario</a></li>                    
                 </ul>                            
             </li>                
             <li class="nivel1"><a href="#">Consultas</a>

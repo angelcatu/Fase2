@@ -102,7 +102,7 @@ public class Modificacion
         }
     }
 
-    public string mostrarEstado(string id)
+    public int mostrarEstado(string id)
     {
         {
 
@@ -115,7 +115,11 @@ public class Modificacion
                 conexion.Open();
 
                 //Consulta sql para obtener la contraseña
-                String accion = "Select Usuario.Estado from Usuario Where IdUsuario = @id";
+                String accion = "Select Usuario.Estado_FK from Usuario " +
+                    "where Usuario.IdUsuario = @id";
+
+                
+
 
                 //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
 
@@ -129,21 +133,22 @@ public class Modificacion
                 //Ejecutar Query
                 try
                 {
-                    String estado = (comando.ExecuteScalar()).ToString();
+                    int estado = comando.ExecuteNonQuery();
                     conexion.Close();
 
                     return estado;
                 }
                 catch (Exception e)
                 {
-                    conexion.Close();
-                    return null;
+                    Console.WriteLine(e.Message);
+                    conexion.Close();                                        
+                    return 0;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                return null;
+                return 0;
             }
         }
     }

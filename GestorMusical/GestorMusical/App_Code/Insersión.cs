@@ -56,7 +56,7 @@ public class Insersión
 
         {
             SqlConnection connection = Conexion.conectar();
-            
+
             try
             {
                 connection.Open();
@@ -94,4 +94,43 @@ public class Insersión
             }
         }
     }
+
+    public void registrarGenero(String genero)
+    {
+
+        {
+            SqlConnection connection = Conexion.conectar();            
+
+            try
+            {
+                connection.Open();
+
+                String query = "INSERT INTO Genero(Tipo) VALUES(@genero)";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@genero", genero);
+           
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
 }
+    

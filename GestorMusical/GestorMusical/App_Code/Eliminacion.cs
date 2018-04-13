@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class Eliminacion
 {
-    public void verificarContraseña(int cod)
+    public void eliminarUsuario(String cod)
     {
 
         //Crear un objeto de tipo conexión

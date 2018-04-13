@@ -10,11 +10,11 @@
     <title>Administrador</title>
     <style type="text/css">
         .auto-style9 {
-            width: 2039px;
+            width: 1683px;
             height: 60px;
         }
         .auto-style11 {
-            width: 2039px;
+            width: 1683px;
             text-align: right;
         }
         .auto-style12 {
@@ -29,7 +29,30 @@
             width: 1431px;
         }
         .auto-style21 {
-            width: 1248px;
+            width: 250px;
+        }
+        .auto-style22 {
+            width: 1683px;
+            text-align: right;
+            height: 22px;
+        }
+        .auto-style23 {
+            width: 488px;
+            height: 22px;
+        }
+        .auto-style24 {
+            width: 1431px;
+            height: 22px;
+        }
+        .auto-style25 {
+            margin-top: 2;
+        }
+        .auto-style30 {
+            width: 1431px;
+            text-align: right;
+        }
+        .auto-style31 {
+            width: 488px;
         }
     </style>
 </head>
@@ -42,7 +65,7 @@
             <li class="nivel1"><a href="#">Gestionar</a>
                 <ul>
                     <li class="nivel2"><a href="crearUsuario.aspx">Crear usuario</a> </li>
-                    <li class="nivel2"><a href="modificarUsuario.aspx">Modificar usuario</a></li>                    
+                    <li class="nivel2"><a href="buscarUsuario.aspx">Modificar usuario</a></li>                    
                 </ul>                            
             </li>                
             <li class="nivel1"><a href="#">Consultas</a>
@@ -70,48 +93,54 @@
              &nbsp;</p>
         <table class="auto-style2">
             <tr>
-                <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
+                <td class="auto-style22"></td>
+                <td class="auto-style23">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actualizar</td>
-                <td class="auto-style18">&nbsp;</td>
+                <td class="auto-style24"></td>
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
+                <td class="auto-style31">
                     &nbsp;</td>
                 <td class="auto-style18">&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style11">Nombre completo:</td>
-                <td class="auto-style21">
+                <td class="auto-style31">
                     <div class="auto-style12">
                         <asp:TextBox ID="txtNombre" runat="server" Width="210px" Height="16px"></asp:TextBox>
                     </div>                    
                 </td>
-                <td class="auto-style18"></td>
+                <td class="auto-style18">
+                    <asp:Label ID="lbNombre" runat="server" ForeColor="Silver"></asp:Label>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style11">Correo:</td>
-                <td class="auto-style21">
+                <td class="auto-style31">
                     <div>
                         <asp:TextBox ID="txtCorreo" runat="server" Width="210px" TextMode="Email"></asp:TextBox>
                     </div>
                     
                 </td>
-                <td class="auto-style18"></td>
+                <td class="auto-style18">
+                    <asp:Label ID="lbCorreo" runat="server" ForeColor="Silver"></asp:Label>
+                </td>
             </tr>
             <tr>
-                <td class="auto-style11">Usuario:</td>
-                <td class="auto-style21">
+                <td class="auto-style30">Usuario:</td>
+                <td class="auto-style31">
                     <div>
                         <asp:TextBox ID="txtUsuario" runat="server" Width="210px" Height="20px"></asp:TextBox>
                     </div>                    
                 </td>
-                <td class="auto-style18"></td>
+                <td class="auto-style18">
+                    <asp:Label ID="lbUsuario" runat="server" ForeColor="Silver"></asp:Label>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style11">Contraseña:</td>
-                <td class="auto-style21">
+                <td class="auto-style31">
                     <div class="auto-style12">
                         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="210px" ></asp:TextBox>
                     </div>                    
@@ -119,48 +148,57 @@
                 
             </tr>
             <tr>
-                <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
+                <td class="auto-style22"></td>
+                <td class="auto-style23">
                     <asp:DropDownList ID="listEstado" runat="server">
                         <asp:ListItem>Activo</asp:ListItem>
                         <asp:ListItem>Eliminado</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+                <td class="auto-style18">
+                    <asp:Label ID="lbEstado" runat="server" ForeColor="Silver"></asp:Label>
+                </td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style31"></td>
                 <td class="auto-style21">
                     &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
-                    <asp:DropDownList ID="listRol" runat="server">
+                <td class="auto-style31">
+                    <asp:DropDownList ID="listRol" runat="server" >
                         <asp:ListItem>Administrador</asp:ListItem>
                         <asp:ListItem>Consulta</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                
-            </tr>
-            <tr>
-                <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
-                    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" Width="211px" OnClick="btnRegistrar_Click" />
+                <td class="auto-style18">
+                    <asp:Label ID="lbRol" runat="server" ForeColor="Silver"></asp:Label>
                 </td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style31">
+                    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" Width="211px" OnClick="btnRegistrar_Click" CssClass="auto-style25" />
+                </td>
                 <td class="auto-style21">
                     &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style21">
-                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" Width="209px" />
+                <td class="auto-style31">
+                    &nbsp;</td>
+                
+            </tr>
+            <tr>
+                <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style31">
+                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" Width="209px" OnClick="btnEliminar_Click" />
                 </td>
                 
             </tr>

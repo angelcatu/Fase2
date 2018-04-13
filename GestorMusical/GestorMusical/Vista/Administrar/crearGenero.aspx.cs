@@ -16,4 +16,14 @@ public partial class Vista_Administrar_crearGenero : System.Web.UI.Page
     {
 
     }
+
+    protected void btnAgregarGenero_Click(object sender, EventArgs e)
+    {
+        Insersión crearGenero = new Insersión();
+
+        if(txtNuevoGener.Text.Length > 0)
+        {
+            crearGenero.registrarGenero(txtNuevoGener.Text);
+        }
+    }
 }
