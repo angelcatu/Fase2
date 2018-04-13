@@ -23,10 +23,20 @@ public partial class Vista_Ingresar : System.Web.UI.Page
             String contraseñaLeida = miConsulta.verificarContraseña(user);
 
             if (contraseñaLeida.Equals(pass)){
-                System.Diagnostics.Debug.Write("Nombre de usuario y contraseña correctos");
-                Response.Write("<script>window.alert('Bienvenido al Musicspot');</script>");
-                Response.Redirect("/Vista/Administrador.aspx", true);
 
+                String estado = miConsulta.verificarEstado(user);
+
+                if (estado.Equals("Activo"))
+                {
+                    System.Diagnostics.Debug.Write("Nombre de usuario y contraseña correctos");
+                    Response.Write("<script>window.alert('Bienvenido al Musicspot');</script>");
+                    Response.Redirect("/Vista/Administrador.aspx", true);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.Write("El usuario está bloqueado");
+                    Response.Write("<script>window.alert('Usuario bloqueado');</script>");
+                }                
             }
             else
             {

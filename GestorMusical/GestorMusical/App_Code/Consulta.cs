@@ -50,47 +50,50 @@ using System.Data.SqlClient;
             }
         }
 
-    public void registrarUsuario(String nombre, String nacimiento, String correo, String usuario, String password, String estado)
+    public String verificarEstado(String username)
     {
-        SqlConnection connection = Conexion.conectar();
-        String rol = "Consulta";
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
 
         try
         {
-            connection.Open();
+            //Abrir la conexion
+            conexion.Open();
 
-            String query = "INSERT INTO Usuario (NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK) " +
-                "VALUES (@nombre, @nacimiento, @correo, @rol , @usuario, @password, @estado)";
+            //Consulta sql para obtener la contraseña
+            String accion = "Select Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado where Usuario.Username = @username";
 
-            SqlCommand command = new SqlCommand(query, connection);
+            //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
 
-            command.Parameters.AddWithValue("@nombre", nombre);
-            command.Parameters.AddWithValue("@nacimiento", nacimiento);
-            command.Parameters.AddWithValue("@correo", correo);
-            command.Parameters.AddWithValue("@rol", rol);
-            command.Parameters.AddWithValue("@usuario", usuario);
-            command.Parameters.AddWithValue("@password", password);
-            command.Parameters.AddWithValue("@estado", estado);
+            //Crear un objeto de tipo SqlCommand y enviar el String
 
+            SqlCommand comando = new SqlCommand(accion, conexion);
 
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@username", username);
+
+            //Ejecutar Query
             try
             {
-                command.ExecuteNonQuery();
-                connection.Close();
+                String estado = (comando.ExecuteScalar()).ToString();
+                conexion.Close();
 
-
+                return estado;
             }
             catch (Exception e)
             {
-                
-                connection.Close();
+                conexion.Close();
+                return null;
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.ToString());
+            return null;
         }
     }
+    
     }
 
 

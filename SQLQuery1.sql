@@ -17,12 +17,24 @@ CONSTRAINT IdEstadoUsuario_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado)
 );
 
 SELECT * FROM Usuario;
+
+SELECT Usuario.IdUsuario, Usuario.NombreCompleto, Usuario.CorreoElectronico, Usuario.FechaNacimiento, Usuario.Rol, Usuario.Username, Estado.Descripcion 
+FROM Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado WHERE Usuario.IdUsuario != 1
+group by Usuario.IdUsuario, Usuario.NombreCompleto, Usuario.CorreoElectronico, Usuario.FechaNacimiento, Usuario.Rol, Usuario.Username, Estado.Descripcion ;
+
 insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK) 
 values('Angel', '1994-07-24', 'angel@gmail.com', 'Administrador', 'Administrador', 'IPC2', 1);
 
+Select Usuario.Contraseña from Usuario where IdUsuario = 1;
+
+
+Select Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado where Usuario.Username = 'Administrador';
+
+select * from Estado ;
+
 
 SELECT Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado
-GROUP BY Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion;
+WHERE Usuario.Rol = 'Consulta' GROUP BY Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion;
 
 
 Select * from Estado;

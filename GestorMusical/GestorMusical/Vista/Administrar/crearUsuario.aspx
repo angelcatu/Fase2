@@ -14,8 +14,36 @@
             text-align: center;
             line-height: 50px;
             border: 4px solid white;
+            width: 607px;
         }
-    </style>
+        .auto-style8 {
+            width: 557px;
+        }
+        .auto-style9 {
+            width: 209px;
+        }
+        .auto-style10 {
+            text-align: left;
+        }
+        .auto-style11 {
+            text-align: right;
+            width: 607px;
+        }
+        .auto-style13 {
+            text-align: center;
+        }
+        .auto-style15 {
+            width: 557px;
+            text-align: center;
+        }
+        .auto-style16 {
+            width: 209px;
+            text-align: center;
+        }
+        .auto-style17 {
+            margin-left: 0;
+        }
+        </style>
 </head>
 <body>
     
@@ -42,18 +70,94 @@
                     <li class="nivel2"><a href="crearGenero.aspx">Crear género</a></li>
                 </ul>
             </li>
-            <li>
-                <form runat ="server">
-                    <asp:Button runat="server" Text="Salir" ID="btnSalir" CssClass="nivel1" Height="57px" OnClick="btnSalir_Click" Width="195px" BackColor="#33CCCC" Font-Size="Medium" />
-                </form>                
+            <li class="nivel1">
+                <a href="/Vista/Ingresar.aspx">Salir</a>
             </li>
 
-            <!-- <a href="/Vista/Ingresar.aspx">Salir</a> -->
+
             
         </ul>
 
     </nav>    
     </header>
+
+    <form runat="server">
+         <p class="auto-style13">
+            <strong>Bienvenido</strong></p>
+        <table class="auto-style2">
+            <tr>
+                <td class="auto-style11">Nombre completo:</td>
+                <td class="auto-style9">
+                    <div class="auto-style10">
+                        <asp:TextBox ID="txtNombre" runat="server" Width="210px" CssClass="auto-style17"></asp:TextBox>
+                    </div>                    
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style11">Correo:</td>
+                <td class="auto-style9">
+                    <div>
+                        <asp:TextBox ID="txtCorreo" runat="server" Width="210px" TextMode="Email"></asp:TextBox>
+                    </div>
+                    
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style11">Usuario:</td>
+                <td class="auto-style9">
+                    <div>
+                        <asp:TextBox ID="txtUsuario" runat="server" Width="210px" Height="20px"></asp:TextBox>
+                    </div>                    
+                </td>
+                <td class="auto-style8"></td>
+            </tr>
+            <tr>
+                <td class="auto-style11">Contraseña:</td>
+                <td class="auto-style16">
+                    <div class="auto-style10">
+                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="210px" ></asp:TextBox>
+                    </div>                    
+                </td>
+                <td class="auto-style15">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style11">Re-Contraseña</td>
+                <td class="auto-style9">
+                    <div>
+                        <asp:TextBox ID="txtPassword2" TextMode="Password" runat="server" Width="210px"></asp:TextBox>
+                    </div>                    
+                </td>
+                <td class="auto-style8"></td>
+            </tr>
+            <tr>
+                <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style9">
+                    <asp:TextBox ID="txtFecha" runat="server" Width="209px" TextMode="Date"></asp:TextBox>
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3"></td>
+                <td class="auto-style9">
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                        <asp:ListItem>Administrador</asp:ListItem>
+                        <asp:ListItem>Consulta</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <td class="auto-style8"></td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>                
+                <td class="auto-style9">
+
+                    <asp:Button ID="btnCrearNuevo" runat="server" Text="Crear" Width="220px" OnClick="btnRegistrar_Click" />
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+            </tr>
+        </table>
+    </form>
         
 </body>
 </html>

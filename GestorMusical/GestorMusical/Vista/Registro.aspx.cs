@@ -21,9 +21,10 @@ public partial class Vista_Registro : System.Web.UI.Page
         String password2 = Convert.ToString(txtPassword2.Text);
 
         Consulta consulta = new Consulta();
+        Insersión insersión = new Insersión();
 
         if (password.Equals(password2)){
-            consulta.registrarUsuario(nombre, fechaCreacion, correo, usuario, password, "1");
+            insersión.registrarUsuario(nombre, fechaCreacion, correo, usuario, password, "1");
 
             Response.Redirect("/Vista/Ingresar.aspx", true);
         }
