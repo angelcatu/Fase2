@@ -16,7 +16,7 @@ CONSTRAINT IdEstadoUsuario_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado)
 
 );
 
-SELECT * FROM Usuario;
+	
 
 SELECT Usuario.IdUsuario, Usuario.NombreCompleto, Usuario.CorreoElectronico, Usuario.FechaNacimiento, Usuario.Rol, Usuario.Username, Estado.Descripcion 
 FROM Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado WHERE Usuario.IdUsuario != 1
@@ -25,13 +25,22 @@ group by Usuario.IdUsuario, Usuario.NombreCompleto, Usuario.CorreoElectronico, U
 insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK) 
 values('Angel', '1994-07-24', 'angel@gmail.com', 'Administrador', 'Administrador', 'IPC2', 1);
 
+insert into Usuario(NombreCompleto, FechaNacimiento, CorreoElectronico, Rol, Username, Contraseña, Estado_FK)
+values ('Usuario8', '2018/04/13', 'user8@gmail.com', 'Consulta', 'User8', '123', 2);
+
 Select Usuario.Contraseña from Usuario where IdUsuario = 1;
 
+UPDATE Usuario SET NombreCompleto='Angel', FechaNacimiento='04/04/2018', CorreoElectronico = 'admin@gmail.com', 
+Rol = 'Administrador', Username = 'AdministradorP'   where Usuario.IdUsuario = 1; 
 
 Select Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado where Usuario.Username = 'Administrador';
 
+Select Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado where Usuario.IdUsuario = 2;
+Select Usuario.Estado_FK from Usuario where Usuario.IdUsuario = 2;
+
 select * from Estado ;
 
+Select * from Usuario;
 
 SELECT Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion from Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado
 WHERE Usuario.Rol = 'Consulta' GROUP BY Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion;
@@ -98,6 +107,10 @@ Tipo VARCHAR(20) NOT NULL,
 );
 
 
+Select * from Genero;
+
+
+
 INSERT INTO Genero (Tipo) VALUES('Rock');
 INSERT INTO Genero (Tipo) VALUES('Pop');
 INSERT INTO Genero (Tipo) VALUES('Metal');
@@ -112,6 +125,8 @@ INSERT INTO Genero (Tipo) VALUES('Clasica');
 INSERT INTO Genero (Tipo) VALUES('Dance');
 
 SELECT * FROM Genero;
+
+Delete from Genero where Genero.IdGenero = 26;
 
 CREATE TABLE Album(
 
