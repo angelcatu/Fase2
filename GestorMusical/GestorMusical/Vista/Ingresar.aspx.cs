@@ -8,8 +8,13 @@ using System.Web.UI.WebControls;
 
 public partial class Vista_Ingresar : System.Web.UI.Page
 {
+
+    private Usuario actualizar = UserConnect.usuario;
+    private List<String> listaCanciones = Usuario.listaCanciones;
+
     protected void Page_Load(object sender, EventArgs e)
-    {      
+    {
+        listaCanciones.Clear();
     }
 
     protected void btnIngresar_Click(object sender, EventArgs e)
@@ -28,9 +33,25 @@ public partial class Vista_Ingresar : System.Web.UI.Page
 
                 if (estado.Equals("Activo"))
                 {
-                    System.Diagnostics.Debug.Write("Nombre de usuario y contraseña correctos");
-                    Response.Write("<script>window.alert('Bienvenido al Musicspot');</script>");
-                    Response.Redirect("/Vista/Administrador.aspx", true);
+
+                    int idUsuario = miConsulta.verificarObtenerIdUsuario(user, pass);
+                    String rol = miConsulta.verificarRolUsuario(idUsuario.ToString());
+
+                    if (rol.Equals("Administrador"))
+                    {
+                        System.Diagnostics.Debug.Write("Nombre de usuario y contraseña correctos");
+                        Response.Write("<script>window.alert('Bienvenido al Musicspot');</script>");
+                        Response.Redirect("/Vista/Administrador.aspx", true);
+                    }
+                    else if (rol.Equals("Consulta"))
+                    {
+                        System.Diagnostics.Debug.Write("Nombre de usuario y contraseña correctos");
+                        Response.Write("<script>window.alert('Bienvenido al Musicspot');</script>");
+
+                        actualizar.setId(idUsuario);
+
+                        Response.Redirect("/Vista/UsuarioConsulta/iniciar.aspx", true);
+                    }                    
                 }
                 else
                 {

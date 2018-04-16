@@ -8,6 +8,9 @@ using System.Web;
 /// </summary>
 public class Usuario
 {
+
+    public static List<String> listaCanciones = new List<string>();
+
     private int id;
     
     public Usuario()

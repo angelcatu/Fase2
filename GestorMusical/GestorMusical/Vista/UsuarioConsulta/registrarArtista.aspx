@@ -2,8 +2,6 @@
 
 <!DOCTYPE html>
 
-<!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -43,27 +41,27 @@
     <header>
         <nav id="menuTop">
         <ul>
-            <li class="nivel1"><a href="#">Inicio</a></li>
+            <li class="nivel1"><a href="iniciar.aspx">Inicio</a></li>
             
             <li class="nivel1"><a href="#">Registros</a>
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Registrar artista</a>
+                        <a href="registrarArtista.aspx">Registrar artista</a>
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Registrar Álbum</a>
+                        <a href="registrarAlbum.aspx">Registrar Álbum</a>
                     </li>
                 </ul>                                                    
             </li>
             <li class="nivel1"><a href="#">Modificaciones</a>
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Modificar artista</a>
+                        <a href="modificarArtista.aspx">Modificar artista</a>
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Modificar álbum</a>
+                        <a href="modificarAlbum.aspx">Modificar álbum</a>
                     </li>
                 </ul>
             </li>
@@ -71,11 +69,11 @@
                 
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Crear listas</a>
+                        <a href="crearLista.aspx">Crear listas</a>
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Ver listas</a>
+                        <a href="verListas.aspx">Ver listas</a>
                     </li>
                 </ul>
 
@@ -108,14 +106,14 @@
             <tr>
                 <td class="auto-style3">Año formacion:</td>
                 <td class="auto-style6">
-                    <asp:TextBox ID="txtFormacion" runat="server" TextMode="Date" Width="374px"></asp:TextBox>
+                    <asp:TextBox ID="txtFormacion" runat="server" Width="374px"></asp:TextBox>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style3">Nacionalidad:</td>
                 <td class="auto-style6">
-                    <asp:DropDownList ID="listNacionalidad" runat="server" DataSourceID="SqlDataSource1" DataTextField="Pais" DataValueField="Pais" Width="233px">
+                    <asp:DropDownList ID="listNacionalidad" runat="server" DataSourceID="SqlDataSource1" DataTextField="Pais" DataValueField="IdNacionalidad" Width="233px">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT [IdNacionalidad], [Pais] FROM [Nacionalidad]"></asp:SqlDataSource>
                 </td>

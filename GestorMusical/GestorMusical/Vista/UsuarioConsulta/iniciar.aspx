@@ -22,7 +22,7 @@
             <li class="nivel1"><a href="#">Registros</a>
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Registrar artista</a>
+                        <a href="registrarArtista.aspx">Registrar artista</a>
                     </li>
 
                     <li class="nivel2">

@@ -76,11 +76,10 @@ IdArtista INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 NombreArtista VARCHAR(30) NOT NULL,
 AñoFormacion VARCHAR (4) NOT NULL,
 Descripcion VARCHAR(240) NOT NULL,
-Fotografia [VARBINARY](MAX) NOT NULL,
+Fotografia VARCHAR(30) NOT NULL,
 Facebook VARCHAR(100) NULL,
 Twitter VARCHAR(100) NULL,
-Linkedin VARCHAR(100) NULL,
-
+Youtube VARCHAR(100) NULL,
 
 Nacionalidad_FK INT NOT NULL,
 CONSTRAINT IdNacionalidadArtista_FK FOREIGN KEY(Nacionalidad_FK) REFERENCES Nacionalidad(IdNacionalidad),
@@ -88,6 +87,28 @@ CONSTRAINT IdNacionalidadArtista_FK FOREIGN KEY(Nacionalidad_FK) REFERENCES Naci
 Usuario_FK INT NOT NULL,
 CONSTRAINT IdUsuario_FK FOREIGN KEY(Usuario_FK) REFERENCES Usuario(IdUsuario)
 );
+
+
+INSERT INTO Artista (NombreArtista, AñoFormacion, Descripcion, Fotografia, Facebook, Twitter, Youtube, Nacionalidad_FK, Usuario_FK)
+VALUES ('Joe Satriani', '1996', 'Guitarrista muy famoso', '-/Imagenes', null, null, 'you.tr1231S', 2, 2);
+
+delete Artista where IdArtista=2;
+
+Select * from Artista;
+
+Select Artista.NombreArtista, Artista.Descripcion, Nacionalidad.Pais, Usuario.NombreCompleto from Artista 
+inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario 
+inner join Nacionalidad on Artista.Nacionalidad_FK = Nacionalidad.IdNacionalidad 
+group by Artista.NombreArtista, Artista.Descripcion, Nacionalidad.Pais, Usuario.NombreCompleto;
+
+Select Artista.IdArtista from Artista inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario;
+
+
+Select*from Artista;
+Select*from Artista_Genero;
+Select*from Nacionalidad;
+Select*from Usuario;
+Select*from Genero;
 
 CREATE TABLE Artista_Genero(
 
@@ -100,6 +121,17 @@ Genero_FK INT NOT NULL,
 CONSTRAINT IdGenero_FK FOREIGN KEY(Genero_FK) REFERENCES Genero(IdGenero),
 
 );
+
+
+Select * from Artista_Genero
+
+INSERT INTO Artista_Genero(Artista_FK, Genero_FK) VALUES (1, 2);
+
+Select Usuario.Rol from Usuario where Usuario.IdUsuario = 1;
+
+SELECT Usuario.IdUsuario from Usuario where Usuario.NombreCompleto = 'Angel' AND Usuario.Contraseña = 'IPC2' ;
+
+
 
 CREATE TABLE Genero(
 IdGenero INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -134,7 +166,7 @@ IdAlbum INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 Titulo VARCHAR(20) NOT NULL,
 FechaCreacion DATE NOT NULL,
 Reseña VARCHAR(240) NULL,
-Portada [VARBINARY](MAX) NOT NULL,
+Portada VARCHAR(30) NOT NULL,
 
 Artista_FK INT NOT NULL,
 CONSTRAINT IdArtistaAlbum_FK FOREIGN KEY(Artista_FK) REFERENCES Artista(IdArtista),
@@ -144,10 +176,21 @@ CONSTRAINT IdEstadoAlbum_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado),
 
 );
 
+Select * from Artista;
+Select * from Usuario;
+INSERT INTO Album (Titulo, FechaCreacion, Reseña, Portada, Artista_FK, Estado_FK) 
+VALUES('Unstappable', '2013/05/20', 'Disco de oro de Joe Satriani', '/Imagenes/2.png', 4, 1) ;
+Select * from Album;
+
+Select Artista.IdArtista from Artista inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario where Usuario.IdUsuario = 11;
+Select Artista.IdArtista, Artista.NombreArtista from Artista inner join Usuario on Artista.Usuario_FK = 11;
+
+
+
 CREATE TABLE Cancion(
 
 IdCancion INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-Cancion [VARBINARY](MAX) NOT NULL,
+Cancion VARCHAR(50) NOT NULL,
 
 Estado_FK INT NOT NULL,
 CONSTRAINT IdEstadoCancion_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado),
@@ -155,6 +198,14 @@ CONSTRAINT IdEstadoCancion_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado)
 Album_FK INT NOT NULL,
 CONSTRAINT IdAlbumCancion_FK FOREIGN KEY(Album_FK) REFERENCES Album(IdAlbum),
 );
+
+SELECT*FROM Cancion;
+
+ALTER TABLE Cancion ADD Ruta VARCHAR(100) NOT NULL;
+
+INSERT INTO Cancion (Cancion, Estado_FK, Album_FK, Ruta) VALUES ('Cancion1', 1, 1, '/Canciones/cancion1'); 
+
+
 
 
 CREATE TABLE Cancion_Lista(

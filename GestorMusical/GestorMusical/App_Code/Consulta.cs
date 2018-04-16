@@ -94,6 +94,182 @@ using System.Data.SqlClient;
         }
     }
     
+    public int verificarObtenerIdUsuario(String username, String password)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "SELECT Usuario.IdUsuario from Usuario where Usuario.Username = @username AND Usuario.Contraseña = @password";
+
+            //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@username", username);
+            comando.Parameters.AddWithValue("@password", password);
+            //Ejecutar Query
+            try
+            {
+                int estado = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return estado;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 0;
+        }
     }
+
+    public String verificarRolUsuario(String idUsuario)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "Select Usuario.Rol from Usuario where Usuario.IdUsuario = @idUsuario";            
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+            //Ejecutar Query
+            try
+            {
+                String rol = (comando.ExecuteScalar()).ToString();
+                conexion.Close();
+
+                return rol;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return null;
+        }
+    }
+
+    public int obtenerUsuarioAsociadoAArtista(String idUsuario)
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "Select Artista.IdArtista from Artista inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario " +
+                "where Usuario.IdUsuario = @idUsuario";
+
+            //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);            
+            //Ejecutar Query
+            try
+            {
+                int estado = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return estado;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 0;
+        }
+    }
+
+    public int obtenerIdAlbumDeArtista(String idArtista, String album)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "SELECT Album.IdAlbum from Artista inner join " +
+                "Album ON Artista.IdArtista = Album.Artista_FK WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @album ";
+            
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idArtista", idArtista);
+            comando.Parameters.AddWithValue("@album", album);
+            //Ejecutar Query
+            try
+            {
+                int idAlbum = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return idAlbum;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 0;
+        }
+    }
+
+}
 
 
