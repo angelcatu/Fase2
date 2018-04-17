@@ -37,7 +37,7 @@
             height: 22px;
         }
         .auto-style23 {
-            width: 488px;
+            width: 215px;
             height: 22px;
         }
         .auto-style24 {
@@ -51,8 +51,14 @@
             width: 1431px;
             text-align: right;
         }
-        .auto-style31 {
-            width: 488px;
+        .auto-style32 {
+            width: 100%;
+        }
+        .auto-style33 {
+            text-align: right;
+        }
+        .auto-style34 {
+            width: 215px;
         }
     </style>
 </head>
@@ -100,47 +106,44 @@
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     &nbsp;</td>
                 <td class="auto-style18">&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style11">Nombre completo:</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     <div class="auto-style12">
-                        <asp:TextBox ID="txtNombre" runat="server" Width="210px" Height="16px"></asp:TextBox>
+                        <asp:TextBox ID="txtNombre" runat="server" Width="206px" Height="16px"></asp:TextBox>
                     </div>                    
                 </td>
                 <td class="auto-style18">
-                    <asp:Label ID="lbNombre" runat="server" ForeColor="Silver"></asp:Label>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style11">Correo:</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     <div>
                         <asp:TextBox ID="txtCorreo" runat="server" Width="210px" TextMode="Email"></asp:TextBox>
                     </div>
                     
                 </td>
                 <td class="auto-style18">
-                    <asp:Label ID="lbCorreo" runat="server" ForeColor="Silver"></asp:Label>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style30">Usuario:</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     <div>
                         <asp:TextBox ID="txtUsuario" runat="server" Width="210px" Height="20px"></asp:TextBox>
                     </div>                    
                 </td>
                 <td class="auto-style18">
-                    <asp:Label ID="lbUsuario" runat="server" ForeColor="Silver"></asp:Label>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style11">Contraseña:</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     <div class="auto-style12">
                         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="210px" ></asp:TextBox>
                     </div>                    
@@ -156,34 +159,57 @@
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style18">
-                    <asp:Label ID="lbEstado" runat="server" ForeColor="Silver"></asp:Label>
-                </td>
+                    &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31"></td>
+                <td class="auto-style34"></td>
                 <td class="auto-style21">
                     &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     <asp:DropDownList ID="listRol" runat="server" >
                         <asp:ListItem>Administrador</asp:ListItem>
                         <asp:ListItem>Consulta</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style18">
-                    <asp:Label ID="lbRol" runat="server" ForeColor="Silver"></asp:Label>
-                </td>
+                    &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31">
-                    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" Width="211px" OnClick="btnRegistrar_Click" CssClass="auto-style25" />
+                <td class="auto-style34">
+                    &nbsp;</td>
+                <td class="auto-style18">
+                    &nbsp;</td>
+                
+            </tr>
+            <tr>
+                <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style34">
+                    &nbsp;</td>
+                <td class="auto-style18">
+                    &nbsp;</td>
+                
+            </tr>
+            <tr>
+                <td class="auto-style11">&nbsp;</td>
+                <td class="auto-style34">
+                    <table class="auto-style32">
+                        <tr>
+                            <td>
+                    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" Width="76px" OnClick="btnRegistrar_Click" CssClass="auto-style25" />
+                            </td>
+                            <td class="auto-style33">
+                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" Width="76px" OnClick="btnEliminar_Click" />
+                            </td>
+                        </tr>
+                    </table>
                 </td>
                 <td class="auto-style21">
                     &nbsp;</td>
@@ -191,15 +217,14 @@
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31">
+                <td class="auto-style34">
                     &nbsp;</td>
                 
             </tr>
             <tr>
                 <td class="auto-style11">&nbsp;</td>
-                <td class="auto-style31">
-                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" Width="209px" OnClick="btnEliminar_Click" />
-                </td>
+                <td class="auto-style34">
+                    &nbsp;</td>
                 
             </tr>
             <tr>                

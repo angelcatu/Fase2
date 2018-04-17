@@ -8,7 +8,7 @@
 
     <link href="../Estilo/estiloNav.css" rel="stylesheet" />
     <link href="../Estilo/estiloConsulta.css" rel="stylesheet" />
-    <title>Inicio</title>
+    <title>Artista</title>
     <style type="text/css">
         .auto-style1 {
             text-align: center;

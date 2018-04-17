@@ -24,7 +24,7 @@ public partial class Vista_Administrar_buscarUsuario : System.Web.UI.Page
             String valor = Convert.ToString(GridView1.SelectedRow.Cells[1].Text);
             int id = Convert.ToInt32(valor);
             
-            actualizar.setId(id);
+            actualizar.setIdUsuarioEditar(id);
 
             Response.Redirect("modificarUsuario.aspx", true);            
 

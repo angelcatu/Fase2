@@ -85,14 +85,18 @@ Nacionalidad_FK INT NOT NULL,
 CONSTRAINT IdNacionalidadArtista_FK FOREIGN KEY(Nacionalidad_FK) REFERENCES Nacionalidad(IdNacionalidad),
 
 Usuario_FK INT NOT NULL,
-CONSTRAINT IdUsuario_FK FOREIGN KEY(Usuario_FK) REFERENCES Usuario(IdUsuario)
+CONSTRAINT IdUsuario_FK FOREIGN KEY(Usuario_FK) REFERENCES Usuario(IdUsuario),
+
+Estado_FK INT NOT NULL,
+CONSTRAINT IdEstado_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado)
 );
 
 
 INSERT INTO Artista (NombreArtista, AñoFormacion, Descripcion, Fotografia, Facebook, Twitter, Youtube, Nacionalidad_FK, Usuario_FK)
 VALUES ('Joe Satriani', '1996', 'Guitarrista muy famoso', '-/Imagenes', null, null, 'you.tr1231S', 2, 2);
 
-delete Artista where IdArtista=2;
+
+ALTER TABLE Artista ADD Estado VARCHAR(100) CONSTRAINT IdUsuario_FK FOREIGN KEY(Usuario_FK) REFERENCES Usuario(IdUsuario) NOT NULL;
 
 Select * from Artista;
 
@@ -126,10 +130,6 @@ CONSTRAINT IdGenero_FK FOREIGN KEY(Genero_FK) REFERENCES Genero(IdGenero),
 Select * from Artista_Genero
 
 INSERT INTO Artista_Genero(Artista_FK, Genero_FK) VALUES (1, 2);
-
-Select Usuario.Rol from Usuario where Usuario.IdUsuario = 1;
-
-SELECT Usuario.IdUsuario from Usuario where Usuario.NombreCompleto = 'Angel' AND Usuario.Contraseña = 'IPC2' ;
 
 
 
@@ -176,8 +176,7 @@ CONSTRAINT IdEstadoAlbum_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado),
 
 );
 
-Select * from Artista;
-Select * from Usuario;
+
 INSERT INTO Album (Titulo, FechaCreacion, Reseña, Portada, Artista_FK, Estado_FK) 
 VALUES('Unstappable', '2013/05/20', 'Disco de oro de Joe Satriani', '/Imagenes/2.png', 4, 1) ;
 Select * from Album;
@@ -185,12 +184,52 @@ Select * from Album;
 Select Artista.IdArtista from Artista inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario where Usuario.IdUsuario = 11;
 Select Artista.IdArtista, Artista.NombreArtista from Artista inner join Usuario on Artista.Usuario_FK = 11;
 
+Select * from Usuario;
 
+Select Artista.NombreArtista from Artista inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 13;
+
+Select Artista.AñoFormacion from Artista inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 13;
+
+
+Select Nacionalidad.IdNacionalidad from Nacionalidad inner join Artista ON Nacionalidad.IdNacionalidad = Artista.Nacionalidad_FK 
+inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 16;
+
+Select Genero.Tipo from Artista inner join Artista_Genero ON Artista.IdArtista = Artista_Genero.Artista_FK 
+inner join Genero ON Artista_Genero.Genero_FK = Genero.IdGenero
+inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 16;
+
+
+Select Genero.IdGenero from Genero inner join Artista_Genero ON Genero.IdGenero = Artista_Genero.Genero_FK 
+inner join Artista ON Artista_Genero.Artista_FK = Artista.IdArtista 
+inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 16;
+
+Select Artista_Genero.Genero_FK from Artista_Genero inner join Artista ON Artista_Genero.Artista_FK = Artista.IdArtista
+inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = 16;
+
+
+
+DELETE FROM Artista WHERE Artista.Usuario_FK = 17;
+DELETE FROM Artista_Genero WHERE Artista_Genero.Artista_FK = 7;
+DELETE FROM Album WHERE Album.Artista_FK = 7;
+DELETE FROM Cancion WHERE Cancion.Album_FK = 5;
+
+
+
+
+
+SELECT * FROM Artista_Genero;
+Select * from Artista;
+Select * from Album;
+Select * from Cancion;
+Select * from Genero;
+Select * from Usuario;
 
 CREATE TABLE Cancion(
 
 IdCancion INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 Cancion VARCHAR(50) NOT NULL,
+
+Ruta VARCHAR(100) NOT NULL,
 
 Estado_FK INT NOT NULL,
 CONSTRAINT IdEstadoCancion_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado),
@@ -199,13 +238,16 @@ Album_FK INT NOT NULL,
 CONSTRAINT IdAlbumCancion_FK FOREIGN KEY(Album_FK) REFERENCES Album(IdAlbum),
 );
 
+SELECT*FROM Usuario;
+SELECT*FROM Artista;
+SELECT*FROM Album;
 SELECT*FROM Cancion;
 
 ALTER TABLE Cancion ADD Ruta VARCHAR(100) NOT NULL;
 
 INSERT INTO Cancion (Cancion, Estado_FK, Album_FK, Ruta) VALUES ('Cancion1', 1, 1, '/Canciones/cancion1'); 
 
-
+SELECT Album.IdAlbum from Artista inner join Album ON Artista.IdArtista = Album.Artista_FK WHERE Artista.IdArtista = 6 And Album.Titulo = 'Album2';
 
 
 CREATE TABLE Cancion_Lista(

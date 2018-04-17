@@ -12,10 +12,21 @@ public class Usuario
     public static List<String> listaCanciones = new List<string>();
 
     private int id;
+    private int idUsuarioEditar;
     
     public Usuario()
     {
         
+    }
+
+    public int getIdUsuarioEditar()
+    {
+        return idUsuarioEditar;
+    }
+
+    public void setIdUsuarioEditar(int idUsuarioEditar)
+    {
+        this.idUsuarioEditar = idUsuarioEditar;
     }
 
     public int getId()

@@ -26,18 +26,18 @@
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Registrar Álbum</a>
+                        <a href="registrarAlbum.aspx">Registrar Álbum</a>
                     </li>
                 </ul>                                                    
             </li>
             <li class="nivel1"><a href="#">Modificaciones</a>
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Modificar artista</a>
+                        <a href="modificarArtista.aspx">Modificar artista</a>
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Modificar álbum</a>
+                        <a href="modificarAlbum.aspx">Modificar álbum</a>
                     </li>
                 </ul>
             </li>
@@ -45,11 +45,11 @@
                 
                 <ul>
                     <li class="nivel2">
-                        <a href="#">Crear listas</a>
+                        <a href="crearLista.aspx">Crear listas</a>
                     </li>
 
                     <li class="nivel2">
-                        <a href="#">Ver listas</a>
+                        <a href="verListas.aspx">Ver listas</a>
                     </li>
                 </ul>
 

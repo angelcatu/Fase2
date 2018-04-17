@@ -239,8 +239,8 @@ using System.Data.SqlClient;
             conexion.Open();
 
             //Consulta sql para obtener la contraseña
-            String accion = "SELECT Album.IdAlbum from Artista inner join " +
-                "Album ON Artista.IdArtista = Album.Artista_FK WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @album ";
+            String accion = "SELECT Album.IdAlbum from Album INNER JOIN Artista ON Album.Artista_FK = Artista.IdArtista " +
+                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @album ";
             
             //Crear un objeto de tipo SqlCommand y enviar el String
 
@@ -270,6 +270,50 @@ using System.Data.SqlClient;
         }
     }
 
+    public int obtenerIdAlbumModificarArtista(String idArtista, String artista)
+
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "SELECT Album.IdAlbum from Album INNER JOIN Artista ON Album.Artista_FK = Artista.IdArtista "+
+                "WHERE Artista.IdArtista = @idArtista AND Artista.NombreArtista = @artista";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idArtista", idArtista);
+            comando.Parameters.AddWithValue("@artista", artista);
+            //Ejecutar Query
+            try
+            {
+                int idAlbum = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return idAlbum;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 0;
+        }
+    }
 }
 
 

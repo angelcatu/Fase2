@@ -13,26 +13,29 @@ public partial class Vista_Administrar_modificarUsuario : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        idUsuario = actualizar.getId();
-        Modificacion modificacion = new Modificacion();
+        idUsuario = actualizar.getIdUsuarioEditar();
 
-        lbNombre.Text = modificacion.mostrarNombre(idUsuario.ToString());
-        lbCorreo.Text = modificacion.mostrarCorreo(idUsuario.ToString());
-        lbUsuario.Text = modificacion.mostrarUsuario(idUsuario.ToString());
-        
+        if (!Page.IsPostBack)
+        {            
+            Modificacion modificacion = new Modificacion();
 
-        int estado = modificacion.mostrarEstado(idUsuario.ToString());
+            txtNombre.Text = modificacion.mostrarNombre(idUsuario.ToString());
+            txtCorreo.Text = modificacion.mostrarCorreo(idUsuario.ToString());
+            txtUsuario.Text = modificacion.mostrarUsuario(idUsuario.ToString());
 
-        if(estado == 1)
-        {
-            lbEstado.Text = "Activo";
-        }
-        else if(estado == 2)
-        {
-            lbEstado.Text = "Eliminado";
-        }       
-        lbRol.Text = modificacion.mostrarRol(idUsuario.ToString());
+            listRol.SelectedValue = modificacion.mostrarRol(idUsuario.ToString());
+            int estado = modificacion.mostrarEstado(idUsuario.ToString());
 
+            if (estado == 1)
+            {
+                listEstado.SelectedValue = "Activo";
+            }
+            else if (estado == 2)
+            {
+                listEstado.SelectedValue = "Eliminado";
+            }
+            
+        }        
     }
 
     protected void btnSalir_Click(object sender, EventArgs e)
@@ -60,12 +63,7 @@ public partial class Vista_Administrar_modificarUsuario : System.Web.UI.Page
         else
         {
             actualizacion.actualizarUsuario(idUsuario.ToString(), nombre, correo, user, password, rol, "2");
-        }
-
-        
-
-
-
+        }     
     }
 
 

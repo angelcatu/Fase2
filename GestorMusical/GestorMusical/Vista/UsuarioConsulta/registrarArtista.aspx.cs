@@ -36,7 +36,7 @@ public partial class Vista_UsuarioConsulta_registrarArtista : System.Web.UI.Page
             String usuario = actualizar.getId().ToString();
             
             Insersión crearArtista = new Insersión();
-            crearArtista.registrarArtista(nombre, formacion, descripcion, ruta, facebook, twitter, youtube, nacionalidad, usuario);
+            crearArtista.registrarArtista(nombre, formacion, descripcion, ruta, facebook, twitter, youtube, nacionalidad, usuario, "1");
 
             Consulta miConsulta = new Consulta();
             String artista = miConsulta.obtenerUsuarioAsociadoAArtista(usuario.ToString()).ToString();

@@ -133,7 +133,7 @@ public class Insersión
         }
     }
 
-    public void registrarArtista(String nombreArtista, String formacion, String descripcion, String portada, String facebook, String twitter, String youtube, String nacionalidad, String usuario )
+    public void registrarArtista(String nombreArtista, String formacion, String descripcion, String portada, String facebook, String twitter, String youtube, String nacionalidad, String usuario, String estado )
     {
                 SqlConnection connection = Conexion.conectar();
 
@@ -141,8 +141,8 @@ public class Insersión
                 {
                     connection.Open();
 
-                    String query = "INSERT INTO Artista (NombreArtista, AñoFormacion, Descripcion, Fotografia, Facebook, Twitter, Youtube, Nacionalidad_FK, Usuario_FK) "+
-                                "VALUES(@nombreArtista, @formacion, @descripcion, @portada, @facebook, @twitter, @youtube, @nacionalidad, @usuario)";
+                    String query = "INSERT INTO Artista (NombreArtista, AñoFormacion, Descripcion, Fotografia, Facebook, Twitter, Youtube, Nacionalidad_FK, Usuario_FK, Estado_FK) "+
+                                "VALUES(@nombreArtista, @formacion, @descripcion, @portada, @facebook, @twitter, @youtube, @nacionalidad, @usuario, @estado)";
 
                     SqlCommand command = new SqlCommand(query, connection);
 
@@ -155,6 +155,7 @@ public class Insersión
                     command.Parameters.AddWithValue("@youtube", youtube);
                     command.Parameters.AddWithValue("@nacionalidad", nacionalidad);
                     command.Parameters.AddWithValue("@usuario", usuario);
+                    command.Parameters.AddWithValue("@estado", estado);
 
 
             try
