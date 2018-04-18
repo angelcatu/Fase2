@@ -57,7 +57,7 @@ public class Eliminacion
     {
         //Poner en estado eliminado la canción, album y el artista
         eliminarCancion(nombreArtista);
-        eliminarAlbum(idArtista);        
+        darDeBajaAlbum(idArtista);        
         eliminarArtista(idUsuario);        
     }
 
@@ -148,7 +148,7 @@ public class Eliminacion
         }
     }
 
-    private void eliminarAlbum(String idArtista)
+    private void darDeBajaAlbum(String idArtista)
 
     {
 
@@ -280,4 +280,100 @@ public class Eliminacion
 
         }
     }
+
+    public void eliminarAlbumConCanciones(String idAlbum)
+    {
+        eliminarCancionDeAlbum(idAlbum);
+        eliminarAlbum(idAlbum);
+    }
+
+    private void eliminarCancionDeAlbum(String idAlbum)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "DELETE FROM Cancion where Album_FK = @idAlbum";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el la cancion");
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
+
+    private void eliminarAlbum(String idAlbum)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "DELETE FROM Album where Album.IdAlbum = @idAlbum";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el album");
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
+
+
 }

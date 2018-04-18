@@ -89,7 +89,16 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 
     protected void btnCancelar_Click(object sender, EventArgs e)
     {
-        
+        Consulta consulta = new Consulta();
+        Eliminacion eliminarAlbum = new Eliminacion();
+
+        int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
+
+        if(txtTitulo.Text.Length > 0)
+        {
+            int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
+            eliminarAlbum.eliminarAlbumConCanciones(idAlbum.ToString());
+        }        
     }
 
     protected void btnCargarCancion_Click1(object sender, EventArgs e)

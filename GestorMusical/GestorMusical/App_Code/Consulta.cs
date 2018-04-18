@@ -314,6 +314,46 @@ using System.Data.SqlClient;
             return 0;
         }
     }
+
+
+    public int obtenerIdListaActual(String nombreDeLista)
+    {        
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "select Lista.IdLista from Lista where Lista.Nombre = @nombreDeLista";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@nombreDeLista", nombreDeLista);            
+            //Ejecutar Query
+            try
+            {
+                int idLista = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return idLista;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 0;
+        }
+    }
 }
 
 

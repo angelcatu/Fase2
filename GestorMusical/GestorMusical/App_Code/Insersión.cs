@@ -289,5 +289,76 @@ public class Insersión
             }
         }
     }
+
+    public void insertarLista(String nombre, String idUsuario)
+
+    {
+        {
+            SqlConnection connection = Conexion.conectar();
+            try
+            {
+                connection.Open();
+
+                String query = "INSERT INTO Lista(Nombre, Usuario_FK) VALUES (@nombre, @idUsuario)";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@nombre", nombre);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);                
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+
+    public void insertarCancionALista(String idCancion, String idLista)
+
+
+    {
+        {
+            SqlConnection connection = Conexion.conectar();
+            try
+            {
+                connection.Open();
+
+                String query = "INSERT INTO Cancion_Lista(Cancion_FK, Lista_FK) VALUES (@idCancion, @idLista)";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@idCancion", idCancion);
+                command.Parameters.AddWithValue("@idLista", idLista);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
 }
     
