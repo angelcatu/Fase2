@@ -38,7 +38,7 @@ public partial class Vista_UsuarioConsulta_registrarAlbum : System.Web.UI.Page
         String titulo = txtTitulo.Text;
         String fecha = txtCreacion.Text;
         String reseña = txtReseña.Text;
-        String portada = fileImage.FileName;
+        String portada = ruta;
 
         if(titulo.Length>0 & fecha.Length>0 & listaCanciones.Count >=1) 
         {

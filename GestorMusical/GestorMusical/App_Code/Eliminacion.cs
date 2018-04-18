@@ -148,7 +148,7 @@ public class Eliminacion
         }
     }
 
-    private void eliminarAlbum(string idArtista)
+    private void eliminarAlbum(String idArtista)
 
     {
 
@@ -192,7 +192,7 @@ public class Eliminacion
         }
     }
 
-    private void eliminarCancion(string nombreArtista)
+    private void eliminarCancion(String nombreArtista)
     {
 
         //Crear un objeto de tipo conexión
@@ -237,6 +237,47 @@ public class Eliminacion
         }
     }
 
+    public void eliminarCancionDefinitivo(String idCancion)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "DELETE FROM Cancion where Cancion.IdCancion = @idCancion";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idCancion", idCancion);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el usuario");
+                conexion.Close();
 
 
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
 }

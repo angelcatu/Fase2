@@ -18,10 +18,10 @@
         }
         .auto-style3 {
             text-align: right;
-            width: 502px;
+            width: 425px;
         }
         .auto-style4 {
-            width: 502px;
+            width: 425px;
         }
         .auto-style5 {
             width: 311px;
@@ -49,7 +49,7 @@
             width: 156px;
         }
         .auto-style12 {
-            width: 502px;
+            width: 425px;
             height: 28px;
         }
         .auto-style13 {
@@ -62,7 +62,7 @@
         }
         .auto-style15 {
             text-align: right;
-            width: 502px;
+            width: 425px;
             height: 32px;
         }
         .auto-style16 {
@@ -126,10 +126,63 @@
     </nav>    
         </header>
         <p class="auto-style1">
-            Publicar álbum</p>
+            Actualizar álbum</p>
         <table class="auto-style2">
             <tr>
-                <td class="auto-style3">Título</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style5">
+                    &nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style5">
+                    <asp:GridView ID="gridInfoAlbum" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridInfoAlbum_RowDeleting" Width="397px">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                        <Columns>
+                            <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Editar" />
+                        </Columns>
+                        <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                    </asp:GridView>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style5">
+                    &nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style6">
+                    <asp:Button ID="btnSeleccion" runat="server" OnClick="btnSeleccion_Click" Text="Seleccionar" Width="260px" />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style5">
+                    &nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style5">
+                    &nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">Título:</td>
                 <td class="auto-style5">
                     <asp:TextBox ID="txtTitulo" runat="server" Width="307px" ReadOnly="True"></asp:TextBox>
                 </td>
@@ -163,6 +216,7 @@
                         <tr>
                             <td class="auto-style9">
                                 <asp:FileUpload ID="fileImage" runat="server" Width="260px" />
+                                <asp:Label ID="lbPortada" runat="server"></asp:Label>
                             </td>
                             <td class="auto-style7">
                     <asp:Button ID="btnCargarPortada" runat="server" Text="OK" Width="35px" OnClick="btnCargarPortada_Click" />
@@ -224,32 +278,29 @@
             <tr>
                 <td class="auto-style4">&nbsp;</td>
                 <td class="auto-style5">
-                    <asp:GridView ID="gridCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="310px" OnRowDeleting="gridCanciones_RowDeleting"  >
-                        <AlternatingRowStyle BackColor="White" />
+                    <asp:GridView ID="gridListaCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="309px" OnRowDeleting="gridListaCanciones_RowDeleting">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField HeaderText="Cancion" />
-                            <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Borrar" />
+                            <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" />
                         </Columns>
-                        <EditRowStyle BackColor="#7C6F57" />
-                        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#E3EAEB" />
-                        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                        <SortedAscendingHeaderStyle BackColor="#246B61" />
-                        <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                        <SortedDescendingHeaderStyle BackColor="#15524A" />
+                        <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT [Cancion], [IdCancion] FROM [Cancion]"></asp:SqlDataSource>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style12"></td>
                 <td class="auto-style13">
-                    <asp:Button ID="btnQuitarCancion" runat="server" Text="Quitar canción" Width="204px" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style14"></td>
             </tr>
             <tr>
@@ -266,7 +317,7 @@
                                 <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" Width="110px" BackColor="#33CC33" Height="35px" OnClick="btnFinalizar_Click" />
                             </td>
                             <td class="auto-style7">
-                                <asp:Button ID="btnEliminar" runat="server" BackColor="#CC3300" Text="Cancelar" Width="110px" Height="35px" OnClick="btnCancelar_Click" />
+                                <asp:Button ID="btnEliminar" runat="server" BackColor="#CC3300" Text="Eliminar" Width="110px" Height="35px" OnClick="btnCancelar_Click" />
                             </td>
                         </tr>
                     </table>

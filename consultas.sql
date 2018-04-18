@@ -23,3 +23,27 @@ inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsu
 
 UPDATE Cancion SET Estado_FK = 1 FROM Cancion inner join Album ON Album.IdAlbum = Cancion.Album_FK inner join Artista ON Album.Artista_FK = Artista.IdArtista 
 WHERE Artista.NombreArtista = 'Artista1' ;
+
+SELECT Cancion.Cancion, Cancion.Ruta from Cancion inner join Album on Cancion.Album_FK = Album.IdAlbum 
+inner join Artista on Album.Artista_FK = Artista.IdArtista where Artista.IdArtista = 2;
+
+DELETE FROM Cancion where Cancion.IdCancion = 9;
+
+Select * from Cancion;
+
+
+Select Album.FechaCreacion from Album inner join Artista on Album.Artista_FK = Artista.IdArtista 
+WHERE Artista.IdArtista = 1 AND Album.Titulo = 'Album3';
+
+Select Album.Reseña from Album inner join Artista on Album.Artista_FK = Artista.IdArtista
+WHERE Artista.IdArtista = 1 AND Album.Titulo = 'Album3' ;
+
+Select Album.Portada from Album inner join Artista on Album.Artista_FK = Artista.IdArtista
+WHERE Artista.IdArtista = 1 AND Album.Titulo = 'Album3' ;
+
+Select Album.Titulo from Album inner join Artista on Album.Artista_FK = Artista.IdArtista
+WHERE Artista.IdArtista = 1 AND Album.Titulo = 'Album3' ;
+
+
+
+

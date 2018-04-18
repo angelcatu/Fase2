@@ -456,5 +456,76 @@ public class Modificacion
         return accion;
     }
 
-    
+    public String mostrarDatosDeAlbum(String idArtista, String titulo, String peticion)
+
+    {
+
+        {
+
+            //Crear un objeto de tipo conexión
+            SqlConnection conexion = Conexion.conectar();
+
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+
+                //Consulta sql para obtener la contraseña
+                String accion = generarConsultaAlbum(idArtista, titulo, peticion);
+
+                SqlCommand comando = new SqlCommand(accion, conexion);
+
+                //Para agregar un parámetro al Where usuario = @username
+                comando.Parameters.AddWithValue("@idArtista", idArtista);
+                comando.Parameters.AddWithValue("@titulo", titulo);
+
+
+                //Ejecutar Query
+                try
+                {                    
+                   
+                        String estado = (comando.ExecuteScalar()).ToString();                    
+                    conexion.Close();
+
+                    return estado;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    conexion.Close();
+                    return "";
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "";
+            }
+        }
+    }
+
+    private string generarConsultaAlbum(string idArtista, string titulo, string peticion)
+    {
+        String accion = "";
+
+        if (peticion.Equals("creacion"))
+        {
+            accion = "Select Album.FechaCreacion from Album inner join Artista on Album.Artista_FK = Artista.IdArtista "+
+                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @titulo";
+
+        }
+        else if (peticion.Equals("reseña"))
+        {
+            accion = "Select Album.Reseña from Album inner join Artista on Album.Artista_FK = Artista.IdArtista " +
+                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @titulo";
+
+        }else if (peticion.Equals("portada"))
+        {
+            accion = "Select Album.Portada from Album inner join Artista on Album.Artista_FK = Artista.IdArtista " +
+                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @titulo";
+        }
+
+
+        return accion;
+    }    
 }

@@ -156,4 +156,48 @@ public class Actualizacion
 
         }
     }
+
+    public void actualizarAlbum(String idAlbum, String creacion, String reseña, String portada)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "UPDATE Album SET FechaCreacion = @creacion , Reseña = @reseña , Portada = @portada where IdAlbum = @idAlbum";                        
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+            comando.Parameters.AddWithValue("@creacion", creacion);
+            comando.Parameters.AddWithValue("@reseña", reseña);
+            comando.Parameters.AddWithValue("@portada", portada);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
 }
