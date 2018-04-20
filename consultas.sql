@@ -8,7 +8,7 @@ Select * from Cancion;
 
 Delete Cancion where Cancion.IdCancion = 15 ;
 
-UPDATE Cancion SET Estado_FK = 1 WHERE Album_FK = 1; 
+UPDATE Cancion SET Estado_FK = 1 WHERE Album_FK = 4; 
 UPDATE Album SET Estado_FK = 1 WHERE Artista_FK = 1;
 UPDATE Artista SET Estado_FK = 1 WHERE Usuario_FK = 19;
 
@@ -105,3 +105,36 @@ WHERE Usuario.IdUsuario = 19;
 Select Lista.Nombre, Count(Cancion_Lista.Cancion_FK) as Canciones from Lista 
 inner join Cancion_Lista on Lista.IdLista = Cancion_Lista.Lista_FK 
 where Lista.Usuario_FK = 19 group by Lista.Nombre;
+
+Select Album.Titulo, Album.FechaCreacion AS Eliminacion, Artista.NombreArtista AS Artista from Album 
+inner join Artista on Album.Artista_FK = Artista.IdArtista
+Where Album.Estado_FK = 2;
+
+Select Cancion.Cancion, Album.Titulo from Cancion 
+inner join Album on Cancion.Album_FK = Album.IdAlbum 
+where Cancion.Estado_FK = 2 AND Album.IdAlbum = 3;
+
+
+Select * from Cancion;
+SElect * from Album;
+
+SELECT Artista.NombreArtista AS Nombre, Artista.AñoFormacion AS Formacion, Nacionalidad.Pais from Artista
+inner join Nacionalidad on Artista.Nacionalidad_FK = Nacionalidad.IdNacionalidad 
+WHERE Artista.Estado_FK = 2; 
+
+
+SELECT Cancion.Cancion from Cancion WHERE CONTAINS(Cancion.Cancion, 'cancion');
+SELECT Album.Titulo from Album WHERE CONTAINS(Album.Titulo, 'Album1');
+
+
+<-- Búsqueda por sectores --->
+
+Select Artista.IdArtista, Artista.NombreArtista from Artista Where Artista.NombreArtista like '%artista%';
+Select Album.IdAlbum, Album.Titulo from Album Where Album.Titulo like '%album%';
+Select Cancion.IdCancion, Cancion.Cancion from Cancion Where Cancion.Cancion like '%1%';
+
+
+
+SElect * from Artista;
+
+

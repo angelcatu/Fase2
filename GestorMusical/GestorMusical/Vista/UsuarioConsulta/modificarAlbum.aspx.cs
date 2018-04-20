@@ -42,7 +42,8 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 
         int idArtista = edicion.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
 
-        String query = "SELECT Album.IdAlbum, Album.Titulo, Album.FechaCreacion, Album.Reseña from Album WHERE Album.Artista_FK =" + idArtista;
+        String query = "SELECT Album.IdAlbum, Album.Titulo, Album.FechaCreacion, Album.Reseña from Album WHERE Album.Artista_FK =" + idArtista + 
+            " AND Album.Estado_FK = 1";
 
 
         SqlCommand consulta = new SqlCommand(string.Format(query), conexion);

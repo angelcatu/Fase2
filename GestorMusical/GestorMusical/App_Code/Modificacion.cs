@@ -153,6 +153,54 @@ public class Modificacion
         }
     }
 
+    public int obtenerIdArtistaConIdAlbum(string idAlbum)
+
+    {
+        {
+
+            //Crear un objeto de tipo conexión
+            SqlConnection conexion = Conexion.conectar();
+
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+
+                //Consulta sql para obtener la contraseña
+                String accion = "select Artista.IdArtista from Artista inner join Album on "+ 
+                    "Artista.IdArtista = Album.Artista_FK where Album.IdAlbum = @idAlbum";
+
+                //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
+
+                //Crear un objeto de tipo SqlCommand y enviar el String
+
+                SqlCommand comando = new SqlCommand(accion, conexion);
+
+                //Para agregar un parámetro al Where usuario = @username
+                comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+
+                //Ejecutar Query
+                try
+                {
+                    int estado = comando.ExecuteNonQuery();
+                    conexion.Close();
+
+                    return estado;
+                }
+                catch (Exception e)
+                {
+                    conexion.Close();
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return 0;
+            }
+        }
+    }
+
     public string mostrarContraseña(string id)
     {
         {

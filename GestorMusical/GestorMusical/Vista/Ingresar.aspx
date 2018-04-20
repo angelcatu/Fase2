@@ -47,6 +47,11 @@
                         <tr>
                             <td class="auto-style10">&nbsp;</td>
                             <td class="auto-style11"><a href="#">Recordar contraseña</a></td>
+                            <td class="auto-style11">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style10">&nbsp;</td>
+                            <td class="auto-style11"><a href="registro.aspx">Crear cuenta</a></td>
                         </tr>
                         <tr>
                             <td class="auto-style10">&nbsp;</td>
