@@ -23,7 +23,17 @@ public partial class Vista_Administrar_crearGenero : System.Web.UI.Page
 
         if(txtNuevoGener.Text.Length > 0)
         {
-            crearGenero.registrarGenero(txtNuevoGener.Text);
+            try
+            {
+                crearGenero.registrarGenero(txtNuevoGener.Text);
+                Response.Write("<script>window.alert('Género creado');</script>");
+            }
+            catch(Exception error )
+            {
+                Response.Write("<script>window.alert('Hubo un problema para crear el género');</script>");
+            }
+
+            
         }
     }
 }

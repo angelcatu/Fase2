@@ -22,7 +22,7 @@ public partial class Vista_UsuarioConsulta_verListas : System.Web.UI.Page
 
         String query = "Select Lista.Nombre, Count(Cancion_Lista.Cancion_FK) as Canciones from Lista "+
                         "inner join Cancion_Lista on Lista.IdLista = Cancion_Lista.Lista_FK "+
-                        "where Lista.Usuario_FK = 19 group by Lista.Nombre ";
+                        "where Lista.Usuario_FK = "+usuario.getId()+" group by Lista.Nombre ";
 
 
         SqlCommand command = new SqlCommand(string.Format(query), conexion);

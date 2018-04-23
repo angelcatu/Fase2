@@ -56,14 +56,25 @@ public partial class Vista_Administrar_modificarUsuario : System.Web.UI.Page
 
         Actualizacion actualizacion = new Actualizacion();
 
-        if (estado.Equals("Activo"))
+        try
         {
-            actualizacion.actualizarUsuario(idUsuario.ToString(), nombre, correo, user, password, rol, "1");
+
+            if (estado.Equals("Activo"))
+            {
+                actualizacion.actualizarUsuario(idUsuario.ToString(), nombre, correo, user, password, rol, "1");
+            }
+            else
+            {
+                actualizacion.actualizarUsuario(idUsuario.ToString(), nombre, correo, user, password, rol, "2");
+            }
+
+            Response.Write("<script>window.alert('Usuario actualizado');</script>");
+
         }
-        else
+        catch(Exception error)
         {
-            actualizacion.actualizarUsuario(idUsuario.ToString(), nombre, correo, user, password, rol, "2");
-        }     
+            Response.Write("<script>window.alert('Hubo un problema en la actualización del usuario');</script>");
+        }        
     }
 
 
@@ -71,6 +82,14 @@ public partial class Vista_Administrar_modificarUsuario : System.Web.UI.Page
     {
         Eliminacion eliminacion = new Eliminacion();
 
-        eliminacion.eliminarUsuario(idUsuario.ToString());
+        try
+        {
+            eliminacion.eliminarUsuario(idUsuario.ToString());
+            Response.Write("<script>window.alert('Usuario eliminado');</script>");
+        }
+        catch(Exception error)
+        {
+            Response.Write("<script>window.alert('Hubo un problema en la eliminación del usuario');</script>");
+        }        
     }   
 }

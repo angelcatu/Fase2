@@ -81,11 +81,23 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
         Actualizacion actualizarAlbum = new Actualizacion();
         Consulta consulta = new Consulta();
 
-        int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
+        try
+        {
 
-        int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
-        
-        actualizarAlbum.actualizarAlbum(idAlbum.ToString(), txtCreacion.Text, txtReseña.Text, lbPortada.Text);
+            int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
+
+            int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
+
+            actualizarAlbum.actualizarAlbum(idAlbum.ToString(), txtCreacion.Text, txtReseña.Text, lbPortada.Text);
+
+            Response.Write("<script>window.alert('Álbum actualizado');</script>");
+            Response.Redirect("iniciar.aspx", true);
+
+        }
+        catch(Exception error)
+        {
+            Response.Write("<script>window.alert('Hubo un error en la actualización del álbum');</script>");
+        }        
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)
@@ -93,12 +105,23 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
         Consulta consulta = new Consulta();
         Eliminacion eliminarAlbum = new Eliminacion();
 
-        int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
-
-        if(txtTitulo.Text.Length > 0)
+        try
         {
-            int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
-            eliminarAlbum.eliminarAlbumConCanciones(idAlbum.ToString());
+            int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
+
+            if (txtTitulo.Text.Length > 0)
+            {
+                int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
+                eliminarAlbum.eliminarAlbumConCanciones(idAlbum.ToString());
+
+                Response.Write("<script>window.alert('Álbum eliminado');</script>");
+                Response.Redirect("iniciar.aspx", true);
+
+            }
+        }
+        catch(Exception error)
+        {
+            Response.Write("<script>window.alert('Hubo un error para eliminar el álbum');</script>");
         }        
     }
 

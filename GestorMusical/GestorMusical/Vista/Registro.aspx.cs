@@ -24,9 +24,20 @@ public partial class Vista_Registro : System.Web.UI.Page
         Insersión insersión = new Insersión();
 
         if (password.Equals(password2)){
-            insersión.registrarUsuario(nombre, fechaCreacion, correo, usuario, password, "1");
 
-            Response.Redirect("/Vista/Ingresar.aspx", true);
+            try
+            {
+                insersión.registrarUsuario(nombre, fechaCreacion, correo, usuario, password, "1");
+
+                Response.Write("<script>window.alert('Artista registrado');</script>");
+
+                Response.Redirect("/Vista/Ingresar.aspx", true);
+
+            }
+            catch(Exception error)
+            {
+                Response.Write("<script>window.alert('Hubo un problema con el registro');</script>");
+            }                        
         }
         else
         {

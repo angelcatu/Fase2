@@ -36,20 +36,32 @@ public partial class Vista_UsuarioConsulta_registrarArtista : System.Web.UI.Page
             String usuario = actualizar.getId().ToString();
             
             Insersión crearArtista = new Insersión();
-            crearArtista.registrarArtista(nombre, formacion, descripcion, ruta, facebook, twitter, youtube, nacionalidad, usuario, "1");
 
-            Consulta miConsulta = new Consulta();
-            String artista = miConsulta.obtenerUsuarioAsociadoAArtista(usuario.ToString()).ToString();
-                
-            crearArtista.registrarGeneroAArtistas(artista, genero);
+            try
+            {
 
-            Response.Redirect("/Vista/UsuarioConsulta/iniciar.aspx", true);
+                crearArtista.registrarArtista(nombre, formacion, descripcion, ruta, facebook, twitter, youtube, nacionalidad, usuario, "1");
+
+                Consulta miConsulta = new Consulta();
+                String artista = miConsulta.obtenerUsuarioAsociadoAArtista(usuario.ToString()).ToString();
+
+                crearArtista.registrarGeneroAArtistas(artista, genero);
+
+                Response.Write("<script>window.alert('Artista registrado');</script>");
+
+                Response.Redirect("iniciar.aspx", true);
 
 
+            }
+            catch(Exception error)
+            {
+                Response.Write("<script>window.alert('Hubo un error con el registro del artista');</script>");
+            }            
         }
         else
         {
             //Mensaje de valores requeridos
+            Response.Write("<script>window.alert('El formulario no está completo');</script>");
         }
 
     }

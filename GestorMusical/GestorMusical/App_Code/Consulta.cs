@@ -50,6 +50,96 @@ using System.Data.SqlClient;
             }
         }
 
+    public String recordarContraseña(String nacimiento)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "SELECT CorreoElectronico FROM Usuario Where FechaNacimiento = @nacimiento";
+            
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@nacimiento", nacimiento);
+
+            //Ejecutar Query
+            try
+            {
+                String correo = (comando.ExecuteScalar()).ToString();
+                conexion.Close();
+
+                return correo;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return null;
+        }
+    }
+
+    public String recuperarContraseña(String nacimiento, String correo)
+
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "SELECT Contraseña FROM Usuario Where FechaNacimiento = @nacimiento AND CorreoElectronico = @correo";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@nacimiento", nacimiento);
+            comando.Parameters.AddWithValue("@correo", correo);
+
+            //Ejecutar Query
+            try
+            {
+                String contraseña = (comando.ExecuteScalar()).ToString();
+                conexion.Close();
+
+                return contraseña;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return null;
+        }
+    }
+
+
+
     public String verificarEstado(String username)
     {
 
@@ -195,7 +285,7 @@ using System.Data.SqlClient;
 
             //Consulta sql para obtener la contraseña
             String accion = "Select Artista.IdArtista from Artista inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario " +
-                "where Usuario.IdUsuario = @idUsuario";
+                "where Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
             //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
 

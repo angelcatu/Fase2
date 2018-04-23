@@ -31,7 +31,17 @@ public partial class Vista_Administrar_crearUsuario : System.Web.UI.Page
 
         if (password.Equals(password2))
         {
-            insersión.registarUsuarioAdmin(nombre, fechaCreacion, correo, rol, usuario, password, "1");
+            try
+            {
+                insersión.registarUsuarioAdmin(nombre, fechaCreacion, correo, rol, usuario, password, "1");
+                Response.Write("<script>window.alert('Usuario creado');</script>");
+
+                limpiar();
+            }
+            catch(Exception error)
+            {
+                Response.Write("<script>window.alert('Hubo un problema para crear al usuario');</script>");
+            }            
         }
         else
         {
@@ -39,5 +49,15 @@ public partial class Vista_Administrar_crearUsuario : System.Web.UI.Page
         }
 
 
+    }
+
+    private void limpiar()
+    {
+        txtUsuario.Text = "";
+        txtCorreo.Text = "";
+        txtFecha.Text = "";
+        txtUsuario.Text = "";
+        txtPassword.Text = "";
+        txtPassword2.Text = "";        
     }
 }

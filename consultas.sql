@@ -133,6 +133,18 @@ Select Artista.IdArtista, Artista.NombreArtista from Artista Where Artista.Nombr
 Select Album.IdAlbum, Album.Titulo from Album Where Album.Titulo like '%album%';
 Select Cancion.IdCancion, Cancion.Cancion from Cancion Where Cancion.Cancion like '%1%';
 
+Select Album.IdAlbum, Album.Titulo, Album.Reseña, Album.FechaCreacion from Album inner join Artista on
+Album.Artista_FK = Artista.IdArtista
+WHERE Artista.IdArtista = 1 ;
+
+
+Select Cancion.IdCancion, Cancion.Cancion, Cancion.Album_FK from Cancion inner join Album on
+Cancion.Album_FK = Album.IdAlbum where Album.IdAlbum = 1 AND Album.Estado_FK = 1;
+
+select Artista.IdArtista from Artista inner join Album on 
+Artista.IdArtista = Album.Artista_FK where Album.IdAlbum = 2;
+
+SELECt * FROM Album;
 
 
 SElect * from Artista;

@@ -75,12 +75,23 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
         Actualizacion actualizarArtista = new Actualizacion();
         Consulta consulta = new Consulta();
 
-        int idArtista = consulta.obtenerUsuarioAsociadoAArtista(idUsuario.ToString());
+        try
+        {
 
-        actualizarArtista.actualizarArtista(idArtista.ToString(), nuevoNombre, nuevaFormacion, nuevaDescripcion, nuevaPortada, nuevoFacebook, nuevoTwitter, nuevoYoutube, nuevaNacionalidad.ToString() , idUsuario.ToString(), "1");
+            int idArtista = consulta.obtenerUsuarioAsociadoAArtista(idUsuario.ToString());
 
-        actualizarArtista.actualizarGeneroArtista(idArtista.ToString(), nuevoGenero.ToString());
+            actualizarArtista.actualizarArtista(idArtista.ToString(), nuevoNombre, nuevaFormacion, nuevaDescripcion, nuevaPortada, nuevoFacebook, nuevoTwitter, nuevoYoutube, nuevaNacionalidad.ToString(), idUsuario.ToString(), "1");
 
+            actualizarArtista.actualizarGeneroArtista(idArtista.ToString(), nuevoGenero.ToString());
+
+            Response.Write("<script>window.alert('Artista actualizado');</script>");
+            Response.Redirect("iniciar.aspx", true);
+
+        }
+        catch(Exception error)
+        {
+            Response.Write("<script>window.alert('Hubo un problema con la actualización del artista');</script>");
+        }        
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)
@@ -88,13 +99,25 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
         Eliminacion eliminarArtista = new Eliminacion();
         Consulta consultarArtista = new Consulta();
         int idUsuario = usuario.getId();
-
+       
         String nuevoNombre = txtNombreArtista.Text;
 
-        int idArtista = consultarArtista.obtenerUsuarioAsociadoAArtista(idUsuario.ToString());
+        try
+        {
+            int idArtista = consultarArtista.obtenerUsuarioAsociadoAArtista(idUsuario.ToString());
 
-        int idAlbum = consultarArtista.obtenerIdAlbumModificarArtista(idArtista.ToString(), nuevoNombre);
+            int idAlbum = consultarArtista.obtenerIdAlbumModificarArtista(idArtista.ToString(), nuevoNombre);
 
-        eliminarArtista.eliminarArtista(idUsuario.ToString(), idArtista.ToString(), idAlbum.ToString(), nuevoNombre);
+            eliminarArtista.eliminarArtista(idUsuario.ToString(), idArtista.ToString(), idAlbum.ToString(), nuevoNombre);
+
+            Response.Write("<script>window.alert('Artista eliminado');</script>");
+            Response.Redirect("iniciar.aspx", true);
+
+
+        }
+        catch(Exception error)
+        {
+            Response.Write("<script>window.alert('Hubo un errro para eliminar al artista');</script>");
+        }        
     }
 }
