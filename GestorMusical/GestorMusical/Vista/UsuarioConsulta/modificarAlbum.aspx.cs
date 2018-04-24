@@ -107,12 +107,14 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 
         try
         {
+            DateTime today = DateTime.Today;
+
             int idArtista = consulta.obtenerUsuarioAsociadoAArtista(usuario.getId().ToString());
 
             if (txtTitulo.Text.Length > 0)
             {
                 int idAlbum = consulta.obtenerIdAlbumDeArtista(idArtista.ToString(), txtTitulo.Text);
-                eliminarAlbum.eliminarAlbumConCanciones(idAlbum.ToString());
+                eliminarAlbum.eliminarAlbumConCanciones(idAlbum.ToString(), today.ToString("d"));
 
                 Response.Write("<script>window.alert('Álbum eliminado');</script>");
                 Response.Redirect("iniciar.aspx", true);
@@ -176,8 +178,7 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 
     protected void gridInfoAlbum_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int fila = e.RowIndex;
-        //String valor = gridListaCanciones.SelectedRow.Cells[1].ToString();
+        int fila = e.RowIndex;        
         String valor = gridInfoAlbum.Rows[fila].Cells[2].Text;
 
         txtTitulo.Text = valor;

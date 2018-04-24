@@ -9,6 +9,7 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
 {
     private Usuario usuario = UserConnect.usuario;
     private Modificacion actualizarArtista = new Modificacion();
+    private List<String> listaArtista = Usuario.listaDeArtista;
         
 
     protected void Page_Load(object sender, EventArgs e)
@@ -35,7 +36,7 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
                 Response.Write("<script>window.alert('El usuario no tiene artista ');</script>");
             }                                
                 txtDescripcion.Text = actualizarArtista.mostrarDatosArtista(idUsuario.ToString(), "descripcion");
-                txtPortada.Text = actualizarArtista.mostrarDatosArtista(idUsuario.ToString(), "portada");
+                imgPortada.ImageUrl = actualizarArtista.mostrarDatosArtista(idUsuario.ToString(), "portada");
             try
             {
                 String value = Convert.ToString(actualizarArtista.mostrarNacionalidadGenero(idUsuario.ToString(), "genero"));
@@ -64,7 +65,7 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
         String nuevaFormacion = txtFormacion.Text;
         String nuevaNacionalidad = listNacionalidad.SelectedValue;
         String nuevaDescripcion = txtDescripcion.Text;
-        String nuevaPortada = txtPortada.Text;
+        String nuevaPortada = lbImage.Text;
         String nuevoGenero = listGenero.SelectedValue;
         String nuevoFacebook = txtFacebook.Text;
         String nuevoTwitter = txtTwitter.Text;
@@ -104,13 +105,19 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
 
         try
         {
+
+            DateTime today = DateTime.Today;
+
+
+
             int idArtista = consultarArtista.obtenerUsuarioAsociadoAArtista(idUsuario.ToString());
 
             int idAlbum = consultarArtista.obtenerIdAlbumModificarArtista(idArtista.ToString(), nuevoNombre);
 
-            eliminarArtista.eliminarArtista(idUsuario.ToString(), idArtista.ToString(), idAlbum.ToString(), nuevoNombre);
+            eliminarArtista.eliminarArtista(idUsuario.ToString(), idArtista.ToString(), idAlbum.ToString(), nuevoNombre, today.ToString("d"));
 
             Response.Write("<script>window.alert('Artista eliminado');</script>");
+            
             Response.Redirect("iniciar.aspx", true);
 
 
@@ -119,5 +126,15 @@ public partial class Vista_UsuarioConsulta_modificarArtista : System.Web.UI.Page
         {
             Response.Write("<script>window.alert('Hubo un errro para eliminar al artista');</script>");
         }        
+    }
+
+    protected void btnActualizarImagen_Click(object sender, EventArgs e)
+    {
+        String raiz = "/Imagenes/";
+        String ruta = raiz + fileImage.FileName;
+
+        imgPortada.ImageUrl = ruta;
+
+        lbImage.Text = ruta;       
     }
 }

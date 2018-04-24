@@ -444,6 +444,48 @@ using System.Data.SqlClient;
             return 0;
         }
     }
+
+
+    public int obtenerCantidadDeArtistasDeUsuario(String idUsuario)
+
+    {
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+            String accion = "Select Count(Artista.Estado_FK) from Artista  inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario "+
+                "where Artista.Estado_FK = 1 AND Usuario.IdUsuario = @idUsuario ";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+            //Ejecutar Query
+            try
+            {
+                int artistas = Convert.ToInt32(comando.ExecuteScalar());
+                conexion.Close();
+
+                return artistas;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                return 9;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            return 9;
+        }
+    }
 }
 
 

@@ -88,12 +88,16 @@ public partial class Vista_UsuarioConsulta_registrarAlbum : System.Web.UI.Page
     {
         
         listaCanciones.Add(fileSong.FileName);
-        //cargarGrid();
+        cargarGrid();
     }
 
     protected void gridCanciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-               
+        int fila = e.RowIndex;
+
+        listaCanciones.RemoveAt(fila);
+
+        cargarGrid();
     }
 
 

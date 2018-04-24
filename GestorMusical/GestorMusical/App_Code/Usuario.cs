@@ -10,6 +10,7 @@ public class Usuario
 {
 
     public static List<String> listaCanciones = new List<string>();
+    public static List<String> listaDeArtista = new List<String>();
 
     private int id;
     private int idUsuarioEditar;

@@ -32,6 +32,13 @@
         .auto-style7 {
             text-align: right;
         }
+        .auto-style8 {
+            width: 386px;
+            text-align: center;
+        }
+        .auto-style9 {
+            width: 326px;
+        }
     </style>
     </head>
 <body>
@@ -146,19 +153,35 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style6">
+                    &nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style8">
+                    <asp:Image ID="imgImagen" runat="server" Height="100px" Width="100px" />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
                 <td class="auto-style3">Portada:</td>
                 <td class="auto-style6">
                     <table class="auto-style2">
                         <tr>
-                            <td>
-                                <asp:FileUpload ID="FileUpload1" runat="server" Width="182px" />
-                                <asp:TextBox ID="txtPortada" runat="server" Width="187px"></asp:TextBox>
+                            <td class="auto-style9">
+                                <asp:FileUpload ID="fileImagen" runat="server" Width="317px" />
                             </td>
-                            <td>&nbsp;</td>
+                            <td class="auto-style7">
+                                <asp:Button ID="btnCargarImagen" runat="server" OnClick="btnCargarImagen_Click" Text="OK" Width="31px" />
+                            </td>
                         </tr>
                     </table>
                 </td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Label ID="lbImagen" runat="server" Visible="False"></asp:Label>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style3">Facebook:</td>

@@ -16,6 +16,9 @@ CONSTRAINT IdEstadoUsuario_FK FOREIGN KEY(Estado_FK) REFERENCES Estado(IdEstado)
 
 );
 
+
+
+
 	
 
 SELECT Usuario.IdUsuario, Usuario.NombreCompleto, Usuario.CorreoElectronico, Usuario.FechaNacimiento, Usuario.Rol, Usuario.Username, Estado.Descripcion 

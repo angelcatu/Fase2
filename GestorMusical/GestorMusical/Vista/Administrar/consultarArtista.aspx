@@ -78,7 +78,7 @@
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                        <asp:BoundField DataField="Formacion" HeaderText="Formacion" SortExpression="Formacion" />
+                        <asp:BoundField DataField="Eliminación" HeaderText="Eliminación" SortExpression="Eliminación" />
                         <asp:BoundField DataField="Pais" HeaderText="Pais" SortExpression="Pais" />
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
@@ -92,7 +92,7 @@
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT Artista.NombreArtista AS Nombre, Artista.AñoFormacion AS Formacion, Nacionalidad.Pais from Artista
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT Artista.NombreArtista AS Nombre, Artista.Eliminacion AS Eliminación, Nacionalidad.Pais from Artista
 inner join Nacionalidad on Artista.Nacionalidad_FK = Nacionalidad.IdNacionalidad 
 WHERE Artista.Estado_FK = 2"></asp:SqlDataSource>
             </td>

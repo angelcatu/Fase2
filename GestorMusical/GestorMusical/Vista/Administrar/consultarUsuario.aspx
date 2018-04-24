@@ -9,15 +9,20 @@
     <link href="../Estilo/estiloNav.css" rel="stylesheet" />
     <title>Administrador</title>
     <style type="text/css">
-        .auto-style5 {
-            text-align: left;
-        }
         .auto-style6 {
+            width: 100%;
+        }
+        .auto-style7 {
+            width: 633px;
+        }
+        .auto-style8 {
             text-align: center;
         }
     </style>
 </head>
 <body>
+    
+    <form id="form1" runat="server">
     
     <header>
      <nav id="menuTop">
@@ -53,38 +58,66 @@
     </nav>    
     </header>
 
-    <div id="grid">
-        <form runat="server">
-        <div class="auto-style5">
-            <div class="auto-style6">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="3" DataSourceID="SqlDataSource2" GridLines="Horizontal" HorizontalAlign="Center" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" Width="600px">
-        <AlternatingRowStyle BackColor="#F7F7F7" />
-        <Columns>
-            <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="NombreCompleto" />
-            <asp:BoundField DataField="Username" HeaderText="Usuario" SortExpression="Username" />
-            <asp:BoundField DataField="FechaNacimiento" HeaderText="Creacion" SortExpression="FechaNacimiento" />
-            <asp:BoundField DataField="Descripcion" HeaderText="Estado" SortExpression="Descripcion" />
-        </Columns>
-        <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
-        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
-        <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
-        <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
-        <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
-        <SortedAscendingCellStyle BackColor="#F4F4FD" />
-        <SortedAscendingHeaderStyle BackColor="#5A4C9D" />
-        <SortedDescendingCellStyle BackColor="#D8D8F0" />
-        <SortedDescendingHeaderStyle BackColor="#3E3277" />
-    </asp:GridView>
-            </div>
-            <br />
-            <br />
-        </div>
+        <table class="auto-style6">
+            <tr>
+                <td class="auto-style7">&nbsp;</td>
+                <td class="auto-style8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style7">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" GridLines="Horizontal" Width="601px">
+                        <AlternatingRowStyle BackColor="#F7F7F7" />
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                            <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="Usuario" />
+                            <asp:BoundField DataField="Creacion" HeaderText="Creacion" SortExpression="Creacion" />
+                        </Columns>
+                        <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
+                        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
+                        <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
+                        <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
+                        <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
+                        <SortedAscendingCellStyle BackColor="#F4F4FD" />
+                        <SortedAscendingHeaderStyle BackColor="#5A4C9D" />
+                        <SortedDescendingCellStyle BackColor="#D8D8F0" />
+                        <SortedDescendingHeaderStyle BackColor="#3E3277" />
+                    </asp:GridView>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT  Usuario.NombreCompleto AS Nombre,  Usuario.Username AS Usuario, Usuario.FechaNacimiento AS Creacion
+FROM Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado WHERE Usuario.IdUsuario != 1
+group by Usuario.NombreCompleto, Usuario.Username,  Usuario.FechaNacimiento "></asp:SqlDataSource>
+                </td>
+                <td>
+                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource2" Width="640px">
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                            <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="Usuario" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
+                        </Columns>
+                        <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
+                        <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
+                        <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
+                        <RowStyle BackColor="White" ForeColor="#003399" />
+                        <SelectedRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
+                        <SortedAscendingCellStyle BackColor="#EDF6F6" />
+                        <SortedAscendingHeaderStyle BackColor="#0D4AC4" />
+                        <SortedDescendingCellStyle BackColor="#D6DFDF" />
+                        <SortedDescendingHeaderStyle BackColor="#002876" />
+                    </asp:GridView>
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT  Usuario.NombreCompleto AS Nombre,  Usuario.Username AS Usuario, Estado.Descripcion
+FROM Usuario inner join Estado on Usuario.Estado_FK = Estado.IdEstado WHERE Usuario.IdUsuario != 1
+group by Usuario.NombreCompleto, Usuario.Username, Estado.Descripcion"></asp:SqlDataSource>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style7">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style7">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
     </form>
-    </div>
-    
-                
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Fase2-ProyectoConnectionString %>" SelectCommand="SELECT Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion FROM Usuario INNER JOIN Estado ON Usuario.Estado_FK = Estado.IdEstado GROUP BY Usuario.NombreCompleto, Usuario.Username, Usuario.FechaNacimiento, Estado.Descripcion"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
         
 </body>
 </html>

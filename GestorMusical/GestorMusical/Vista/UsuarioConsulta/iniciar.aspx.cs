@@ -188,12 +188,27 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     {
         int fila = e.RowIndex;        
         String idCancion = gridResultCancion.Rows[fila].Cells[1].Text;
+
+        String ruta = modificacion.obtenerRutaCancion(idCancion);
+
+        reproducir(ruta);
                 
     }
-
+ 
     protected void gridVerCanciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int fila = e.RowIndex;
         String idCancion = gridVerCanciones.Rows[fila].Cells[1].Text;
+
+        String ruta = modificacion.obtenerRutaCancion(idCancion);
+
+        reproducir(ruta);
+    }
+
+    private void reproducir(String ruta)
+    {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+        player.SoundLocation = ruta;
+        player.Play();
     }
 }

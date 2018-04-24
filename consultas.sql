@@ -1,16 +1,31 @@
 USE [Fase2-Proyecto]
 GO
 
+Select * from Estado;
 Select * from Usuario;
 Select * from Artista;
 Select * from Album;
 Select * from Cancion;
+Select * from Lista;
+select * from Genero;
+
+UPDATE Artista SET Estado_FK = 1, Eliminacion = null WHERE IdArtista = 1;
+UPDATE Album SET Estado_FK = 1, Eliminacion = null WHERE Artista_FK = 1;
+
+<-- Cantidad de artistas por usuario
+
+Select Count(Artista.Estado_FK) from Artista  inner join Usuario on Artista.Usuario_FK = Usuario.IdUsuario
+where Artista.Estado_FK = 1 AND Usuario.IdUsuario = 1;
+<--------------------------------------
+
+
+Update Album set Estado_FK = 2 where Artista_FK = ;
 
 Delete Cancion where Cancion.IdCancion = 15 ;
 
-UPDATE Cancion SET Estado_FK = 1 WHERE Album_FK = 4; 
+UPDATE Cancion SET Estado_FK = 1 WHERE Album_FK = 2; 
 UPDATE Album SET Estado_FK = 1 WHERE Artista_FK = 1;
-UPDATE Artista SET Estado_FK = 1 WHERE Usuario_FK = 19;
+UPDATE Artista SET Estado_FK = 1 WHERE Usuario_FK = 18;
 
 SELECT Album.IdAlbum from Album INNER JOIN Artista ON Album.Artista_FK = Artista.IdArtista 
 WHERE Artista.IdArtista = 1 AND Artista.NombreArtista = 'Artista1';
@@ -149,4 +164,14 @@ SELECt * FROM Album;
 
 SElect * from Artista;
 
+
+<---- Seleccion de artistas por génro
+
+Select Artista.IdArtista, Artista.NombreArtista from Artista 
+inner join Artista_Genero on Artista.IdArtista = Artista_Genero.Artista_FK 
+inner join Genero on Artista_Genero.Genero_FK = Genero.IdGenero where Genero.Tipo = 'Electronica' AND Artista.Estado_FK = 1;
+
+
+select * from Artista_Genero;
+select * from Genero;
 

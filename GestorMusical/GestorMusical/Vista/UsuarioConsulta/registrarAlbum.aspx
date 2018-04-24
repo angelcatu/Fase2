@@ -229,7 +229,6 @@
                     <asp:GridView ID="gridCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="310px" OnRowDeleting="gridCanciones_RowDeleting"  >
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
-                            <asp:BoundField HeaderText="Cancion" />
                             <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Borrar" />
                         </Columns>
                         <EditRowStyle BackColor="#7C6F57" />
@@ -250,8 +249,7 @@
             <tr>
                 <td class="auto-style12"></td>
                 <td class="auto-style13">
-                    <asp:Button ID="btnQuitarCancion" runat="server" Text="Quitar canción" Width="204px" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style14"></td>
             </tr>
             <tr>

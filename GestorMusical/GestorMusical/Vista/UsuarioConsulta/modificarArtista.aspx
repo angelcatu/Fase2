@@ -32,6 +32,32 @@
         .auto-style7 {
             text-align: right;
         }
+        .auto-style8 {
+            width: 386px;
+            text-align: center;
+        }
+        .auto-style9 {
+            width: 319px;
+        }
+        .auto-style10 {
+            width: 116%;
+        }
+        .auto-style11 {
+            text-align: center;
+            width: 230px;
+        }
+        .auto-style12 {
+            text-align: right;
+            width: 500px;
+            height: 22px;
+        }
+        .auto-style13 {
+            width: 386px;
+            height: 22px;
+        }
+        .auto-style14 {
+            height: 22px;
+        }
     </style>
     </head>
 <body>
@@ -146,19 +172,36 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style8">
+                    <asp:Image ID="imgPortada" runat="server" Height="107px" Width="107px" />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
                 <td class="auto-style3">Portada:</td>
                 <td class="auto-style6">
                     <table class="auto-style2">
                         <tr>
-                            <td>
-                                <asp:FileUpload ID="FileUpload1" runat="server" Width="182px" />
-                                <asp:TextBox ID="txtPortada" runat="server" Width="187px"></asp:TextBox>
+                            <td class="auto-style11">
+                                <table class="auto-style10">
+                                    <tr>
+                                        <td class="auto-style9">
+                                <asp:FileUpload ID="fileImage" runat="server" Width="182px" />
+                                        </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
                             </td>
-                            <td>&nbsp;</td>
+                            <td class="auto-style7">
+                                <asp:Button ID="btnActualizarImagen" runat="server" OnClick="btnActualizarImagen_Click" Text="OK" Width="29px" />
+                            </td>
                         </tr>
                     </table>
                 </td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Label ID="lbImage" runat="server" Visible="False"></asp:Label>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style3">Facebook:</td>
@@ -168,11 +211,11 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style3">Twitter:</td>
-                <td class="auto-style6">
+                <td class="auto-style12">Twitter:</td>
+                <td class="auto-style13">
                     <asp:TextBox ID="txtTwitter" runat="server" Width="378px"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
+                <td class="auto-style14"></td>
             </tr>
             <tr>
                 <td class="auto-style3">Youtube:</td>

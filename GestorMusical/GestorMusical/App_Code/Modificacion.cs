@@ -462,42 +462,42 @@ public class Modificacion
         if (peticion.Equals("nombre"))
         {
             accion = "Select Artista.NombreArtista from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }
         else if (peticion.Equals("debut"))
         {
             accion = "Select Artista.AñoFormacion from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }      
         else if (peticion.Equals("descripcion"))
         {
             accion = "Select Artista.Descripcion from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }
         else if (peticion.Equals("portada"))
         {
             accion = "Select Artista.Fotografia from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }        
         else if (peticion.Equals("facebook"))
         {
             accion = "Select Artista.Facebook from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
         }
         else if (peticion.Equals("twitter"))
         {
             accion = "Select Artista.Twitter from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }
         else if (peticion.Equals("youtube"))
         {
             accion = "Select Artista.Youtube from Artista " +
-            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario";
+            "inner join Usuario ON Artista.Usuario_FK = Usuario.IdUsuario WHERE Usuario.IdUsuario = @idUsuario AND Artista.Estado_FK = 1";
 
         }
 
@@ -576,4 +576,48 @@ public class Modificacion
 
         return accion;
     }    
+
+    public String obtenerRutaCancion(String idCancion)
+    {
+        {
+
+            //Crear un objeto de tipo conexión
+            SqlConnection conexion = Conexion.conectar();
+
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+
+                //Consulta sql para obtener la contraseña
+                String accion = "Select Cancion.Ruta from Cancion where IdCancion = @idCancion";
+
+                SqlCommand comando = new SqlCommand(accion, conexion);
+
+                //Para agregar un parámetro al Where usuario = @username
+                comando.Parameters.AddWithValue("@idCancion", idCancion);                
+
+                //Ejecutar Query
+                try
+                {
+
+                    String estado = (comando.ExecuteScalar()).ToString();
+                    conexion.Close();
+
+                    return estado;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    conexion.Close();
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+    }
 }

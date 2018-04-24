@@ -25,7 +25,7 @@ public partial class Vista_Administrar_consultarAlbum : System.Web.UI.Page
     {
         SqlConnection conexion = Conexion.conectar();
 
-        String query = "Select Album.IdAlbum, Album.Titulo, Album.FechaCreacion AS Eliminacion, Artista.NombreArtista AS Artista from Album "+
+        String query = "Select Album.IdAlbum, Album.Titulo, Album.Eliminacion AS Eliminacion, Artista.NombreArtista AS Artista from Album "+
                     "inner join Artista on Album.Artista_FK = Artista.IdArtista " +
                     "Where Album.Estado_FK = 2";
 

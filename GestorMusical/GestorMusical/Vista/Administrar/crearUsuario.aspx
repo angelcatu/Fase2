@@ -142,7 +142,6 @@
                 <td class="auto-style3"></td>
                 <td class="auto-style9">
                     <asp:DropDownList ID="DropDownList1" runat="server">
-                        <asp:ListItem>Administrador</asp:ListItem>
                         <asp:ListItem>Consulta</asp:ListItem>
                     </asp:DropDownList>
                 </td>

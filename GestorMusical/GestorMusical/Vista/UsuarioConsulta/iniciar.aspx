@@ -75,7 +75,12 @@
     <header>
         <nav id="menuTop">
         <ul>
-            <li class="nivel1"><a href="#">Inicio</a></li>
+            <li class="nivel1"><a href="#">Explorar</a>                
+                        <ul>
+                            <li class ="nivel2"><a href="generosMusicales.aspx">Generos</a></li>                            
+                            <li class ="nivel2"><a href="listasDeReproduccion.aspx">Listas de reproducción</a></li>
+                        </ul>                                                                                                    
+            </li>
             
             <li class="nivel1"><a href="#">Registros</a>
                 <ul>

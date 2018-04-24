@@ -53,15 +53,15 @@ public class Eliminacion
     }
 
 
-    public void eliminarArtista(String idUsuario, String idArtista, String idAlbum, String nombreArtista)
+    public void eliminarArtista(String idUsuario, String idArtista, String idAlbum, String nombreArtista, String fechaActual)
     {
         //Poner en estado eliminado la canción, album y el artista
         eliminarCancion(nombreArtista);
-        darDeBajaAlbum(idArtista);        
-        eliminarArtista(idUsuario);        
+        darDeBajaAlbum(idArtista, fechaActual);        
+        eliminarArtista(idUsuario, fechaActual);        
     }
 
-    private void eliminarArtista(string idUsuario)
+    private void eliminarArtista(string idUsuario, String fechaActual)
 
     {
 
@@ -74,7 +74,7 @@ public class Eliminacion
             conexion.Open();
 
             //Consulta sql para obtener la contraseña
-            String accion = "UPDATE Artista SET Estado_FK = 2 WHERE Usuario_FK = @idUsuario";
+            String accion = "UPDATE Artista SET Estado_FK = 2, Eliminacion = @fechaActual WHERE Usuario_FK = @idUsuario";
 
             //Crear un objeto de tipo SqlCommand y enviar el String
 
@@ -82,6 +82,7 @@ public class Eliminacion
 
             //Para agregar un parámetro al Where usuario = @username
             comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+            comando.Parameters.AddWithValue("@fechaActual", fechaActual);
 
             //Ejecutar Query
             try
@@ -148,7 +149,7 @@ public class Eliminacion
         }
     }
 
-    private void darDeBajaAlbum(String idArtista)
+    private void darDeBajaAlbum(String idArtista, String fechaActual)
 
     {
 
@@ -161,7 +162,7 @@ public class Eliminacion
             conexion.Open();
 
             //Consulta sql para obtener la contraseña
-            String accion = "UPDATE Album SET Estado_FK = 2 WHERE Artista_FK = @idArtista";
+            String accion = "UPDATE Album SET Estado_FK = 2, Eliminacion = @fechaActual WHERE Artista_FK = @idArtista";
 
             //Crear un objeto de tipo SqlCommand y enviar el String
 
@@ -169,6 +170,7 @@ public class Eliminacion
 
             //Para agregar un parámetro al Where usuario = @username
             comando.Parameters.AddWithValue("@idArtista", idArtista);
+            comando.Parameters.AddWithValue("@fechaActual", fechaActual);
 
             //Ejecutar Query
             try
@@ -281,10 +283,10 @@ public class Eliminacion
         }
     }
 
-    public void eliminarAlbumConCanciones(String idAlbum)
+    public void eliminarAlbumConCanciones(String idAlbum, String eliminacion)
     {
         eliminarCancionDeAlbum(idAlbum);
-        eliminarAlbum(idAlbum);
+        eliminarAlbum(idAlbum, eliminacion);
     }
 
     private void eliminarCancionDeAlbum(String idAlbum)
@@ -331,7 +333,7 @@ public class Eliminacion
         }
     }
 
-    private void eliminarAlbum(String idAlbum)
+    private void eliminarAlbum(String idAlbum, String eliminacion)
 
     {
 
@@ -344,7 +346,8 @@ public class Eliminacion
             conexion.Open();
 
             //Consulta sql para obtener la contraseña
-            String accion = "DELETE FROM Album where Album.IdAlbum = @idAlbum";
+
+            String accion = "Update Album set Estado_FK = 2, Eliminacion = @eliminacion where Album.IdAlbum = @idAlbum ";
 
             //Crear un objeto de tipo SqlCommand y enviar el String
 
@@ -352,6 +355,7 @@ public class Eliminacion
 
             //Para agregar un parámetro al Where usuario = @username
             comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+            comando.Parameters.AddWithValue("@eliminacion", eliminacion);
 
             //Ejecutar Query
             try

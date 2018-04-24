@@ -11,10 +11,12 @@ public partial class Vista_Ingresar : System.Web.UI.Page
 
     private Usuario actualizar = UserConnect.usuario;
     private List<String> listaCanciones = Usuario.listaCanciones;
+    private List<String> listaArtistas = Usuario.listaDeArtista;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         listaCanciones.Clear();
+        
     }
 
     protected void btnIngresar_Click(object sender, EventArgs e)
