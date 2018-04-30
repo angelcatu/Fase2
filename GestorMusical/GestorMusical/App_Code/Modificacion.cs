@@ -167,7 +167,7 @@ public class Modificacion
                 conexion.Open();
 
                 //Consulta sql para obtener la contraseña
-                String accion = "select Artista.IdArtista from Artista inner join Album on "+ 
+                String accion = "Select Artista.IdArtista from Artista inner join Album on "+ 
                     "Artista.IdArtista = Album.Artista_FK where Album.IdAlbum = @idAlbum";
 
                 //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
@@ -182,13 +182,73 @@ public class Modificacion
                 //Ejecutar Query
                 try
                 {
-                    int estado = comando.ExecuteNonQuery();
+                    int estado = Convert.ToInt32(comando.ExecuteScalar());
                     conexion.Close();
 
                     return estado;
                 }
                 catch (Exception e)
                 {
+                    conexion.Close();
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return 0;
+            }
+        }
+    }
+
+    public int obtenerFavLikeAlbum(String idAlbum, String peticion, String idUsuario)
+
+
+    {
+        {
+            //Crear un objeto de tipo conexión
+            SqlConnection conexion = Conexion.conectar();
+
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+
+                //Consulta sql para obtener la contraseña
+                String accion = "";
+
+                if (peticion.Equals("fav"))
+                {
+                    accion = "SELECT Favorito.Album_FK from Favorito where Favorito.Album_FK = @idAlbum and Favorito.Usuario_FK = @idUsuario";
+
+
+                }
+                else if (peticion.Equals("like"))
+                {
+                    accion = "SELECT MeGusta.Album_FK from MeGusta where MeGusta.Album_FK = @idAlbum and MeGusta.Usuario_FK = @idUsuario";
+                }
+
+
+
+
+                SqlCommand comando = new SqlCommand(accion, conexion);
+
+                //Para agregar un parámetro al Where usuario = @username
+                comando.Parameters.AddWithValue("@idAlbum", idAlbum);
+                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                //Ejecutar Query
+                try
+                {
+
+                    int nacGen = Convert.ToInt32(comando.ExecuteScalar());
+                    conexion.Close();
+
+                    return nacGen;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                     conexion.Close();
                     return 0;
                 }
@@ -570,7 +630,7 @@ public class Modificacion
         }else if (peticion.Equals("portada"))
         {
             accion = "Select Album.Portada from Album inner join Artista on Album.Artista_FK = Artista.IdArtista " +
-                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @titulo";
+                "WHERE Artista.IdArtista = @idArtista AND Album.Titulo = @titulo ";
         }
 
 

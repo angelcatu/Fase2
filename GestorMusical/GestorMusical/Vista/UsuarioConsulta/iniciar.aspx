@@ -66,6 +66,16 @@
             text-align: center;
             width: 594px;
         }
+        .auto-style18 {
+            width: 109px;
+        }
+        .auto-style20 {
+            width: 195px;
+            height: 155px;
+        }
+        .auto-style21 {
+            width: 39px;
+        }
     </style>
     </head>
 <body>
@@ -228,7 +238,7 @@
                                 <asp:GridView ID="gridResultAlbum" runat="server" CellPadding="4" CssClass="auto-style6" ForeColor="#333333" GridLines="None" OnRowDeleting="gridResultAlbum_RowDeleting" Width="372px">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <Columns>
-                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Ver" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Ver" ImageUrl="~/Imagenes/2.png" />
                                     </Columns>
                                     <EditRowStyle BackColor="#999999" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -246,30 +256,13 @@
                     </table>
                 </td>
                 <td class="auto-style15">
-                    <asp:Image ID="imgPortada" runat="server" Height="93px" Width="102px" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style16">
                     <table class="auto-style1">
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px">
-                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                                    <Columns>
-                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />
-                                    </Columns>
-                                    <EditRowStyle BackColor="#999999" />
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                                </asp:GridView>
-                            </td>
+                                &nbsp;</td>
                         </tr>
                     </table>
                 </td>
@@ -277,7 +270,28 @@
             <tr>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style12">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>
+                    <table class="auto-style1">
+                        <tr>
+                            <td class="auto-style18">
+                                <asp:Label ID="lbTituloAlbum" runat="server"></asp:Label>
+                            </td>
+                            <td class="auto-style21">&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style18">
+                    <asp:Image ID="imgPortada" runat="server" Height="93px" Width="93px" />
+                            </td>
+                            <td class="auto-style21">
+                                <asp:ImageButton ID="btnLike" runat="server" Height="38px" ImageUrl="~/Imagenes/like_vacio.png" OnClick="btnLike_Click" Visible="False" Width="42px" />
+                            </td>
+                            <td>
+                                <asp:ImageButton ID="btnFav" runat="server" Height="44px" ImageUrl="~/Imagenes/estrella_vacio.png" OnClick="btnFav_Click" Visible="False" Width="44px" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style17">
@@ -287,7 +301,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
+                <td class="auto-style14">
                     <table class="auto-style1">
                         <tr>
                             <td>&nbsp;</td>
@@ -312,8 +326,25 @@
                         </tr>
                     </table>
                 </td>
-                <td class="auto-style12">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td class="auto-style20"></td>
+                <td class="auto-style16">
+                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <Columns>
+                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />
+                                    </Columns>
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
+                            </td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>

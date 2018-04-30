@@ -175,3 +175,37 @@ inner join Genero on Artista_Genero.Genero_FK = Genero.IdGenero where Genero.Tip
 select * from Artista_Genero;
 select * from Genero;
 
+Select * from Cancion;
+
+Select Cancion.Ruta from Cancion where IdCancion = ;
+
+
+<-- Consultas de Fav & Like -->
+
+
+Select * from Favorito;
+Select * from MeGusta;
+select * from Album;
+select * from Usuario;
+
+
+drop table Favorito;
+drop table MeGusta;
+
+SELECT MeGusta.Album_FK from MeGusta where MeGusta.Album_FK = 5 and MeGusta.Usuario_FK = 18;
+
+Delete from MeGusta where IdLike = 3 and Usuario_FK = 18 ;
+
+INSERT INTO Favorito(Album_FK) VALUES (5);
+INSERT INTO MeGusta(Album_FK) VALUES (4);
+
+SELECT Favorito.Album_FK from Favorito where Favorito.Album_FK = 6 and Usuario_FK = 1;
+SELECT MeGusta.Album_FK from MeGusta where MeGusta.Album_FK = 6 and Usuario_FK = 2;
+
+
+INSERT INTO Favorito(Cancion_FK) VALUES ();
+
+
+
+drop table Favorito;
+drop table MeGusta;

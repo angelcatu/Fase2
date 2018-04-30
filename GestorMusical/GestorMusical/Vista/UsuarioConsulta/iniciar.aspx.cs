@@ -10,6 +10,7 @@ using System.Data;
 public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 {
     private Usuario usuario = UserConnect.usuario;
+    private Album album_connect = UserConnect.album;
     private Modificacion modificacion = new Modificacion();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -131,13 +132,15 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         int idAlbum = Convert.ToInt32(id);
 
+        album_connect.setIdAlbum(idAlbum);
+
         int idArtista = modificacion.obtenerIdArtistaConIdAlbum(id);
 
         String portada = modificacion.mostrarDatosDeAlbum(idArtista.ToString(), nombreAlbum, "portada");
 
         if(idArtista != 0)
         {
-            mostrarCanciones(idAlbum, portada);
+            mostrarCanciones(idAlbum, portada, nombreAlbum);
         }
 
         
@@ -151,23 +154,27 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         int idAlbum = Convert.ToInt32(id);
 
-        int idArtista = modificacion.obtenerIdArtistaConIdAlbum(id);
+        album_connect.setIdAlbum(idAlbum);
+
+        int idArtista = modificacion.obtenerIdArtistaConIdAlbum(idAlbum.ToString());
 
         String portada = modificacion.mostrarDatosDeAlbum(idArtista.ToString(), nombreAlbum, "portada");
 
         if (idArtista != 0)
         {
-            mostrarCanciones(idAlbum, portada);
+            mostrarCanciones(idAlbum, portada, nombreAlbum);
         }
     }
 
-    private void mostrarCanciones(int idAlbum, String portada)
+    private void mostrarCanciones(int idAlbum, String portada, String nombreAlbum)
     {
 
         imgPortada.ImageUrl = portada;
-
+        lbTituloAlbum.Text = nombreAlbum;
         lbCanciones.Visible = true;
 
+        actualizarEmoticons(idAlbum.ToString());        
+                
         SqlConnection conexion = Conexion.conectar();
 
         String query = "Select Cancion.IdCancion, Cancion.Cancion, Cancion.Album_FK from Cancion inner join Album on " +
@@ -182,6 +189,38 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         gridVerCanciones.DataSource = dt;
         gridVerCanciones.DataBind();
         conexion.Close();
+    }
+
+    private void actualizarEmoticons(String idAlbum)
+    {
+        int albumFav = modificacion.obtenerFavLikeAlbum(idAlbum, "fav", usuario.getId().ToString());
+        int albumLike = modificacion.obtenerFavLikeAlbum(idAlbum, "like", usuario.getId().ToString());
+
+        if (albumFav == Convert.ToInt32(idAlbum))
+        {
+            btnFav.Visible = true;
+            btnFav.Enabled = false;
+            btnFav.ImageUrl = "/Imagenes/estrella.png";
+        }
+        else
+        {
+            btnFav.Enabled = true;
+            btnFav.Visible = true;
+            btnFav.ImageUrl = "/Imagenes/estrella_vacio.png";
+        }
+
+        if (albumLike == Convert.ToInt32(idAlbum))
+        {
+            btnLike.Visible = true;
+            btnLike.Enabled = false;
+            btnLike.ImageUrl = "/Imagenes/like.png";
+        }
+        else
+        {
+            btnLike.Enabled = true;
+            btnLike.Visible = true;
+            btnLike.ImageUrl = "/Imagenes/like_vacio.png";
+        }
     }
 
     protected void gridResultCancion_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -210,5 +249,32 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         player.SoundLocation = ruta;
         player.Play();
+    }
+
+    protected void btnLike_Click(object sender, ImageClickEventArgs e)
+    {
+        insertarFavoritoMeGusta("like");
+    }
+
+    protected void btnFav_Click(object sender, ImageClickEventArgs e)
+    {
+        insertarFavoritoMeGusta("favorito");        
+    }
+
+    private void insertarFavoritoMeGusta(String peticion)
+    {
+        int idAlbum = album_connect.getIdAlbum();
+
+        Insersión insertar = new Insersión();
+        try
+        {
+            insertar.insertarFavMeGustaAlbum(idAlbum.ToString(), peticion, usuario.getId().ToString());            
+            actualizarEmoticons(idAlbum.ToString());
+
+        }
+        catch(Exception e)
+        {
+
+        }        
     }
 }

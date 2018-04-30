@@ -10,6 +10,7 @@ public class UserConnect
 {
 
     public static Usuario usuario = new Usuario();
+    public static Album album = new Album();
 
     public UserConnect()
     {        

@@ -252,6 +252,50 @@ public class Insersión
             }        
     }
 
+    public void insertarFavMeGustaAlbum(String idAlbum, String peticion, String idUsuario)
+
+
+    {
+        {
+            SqlConnection connection = Conexion.conectar();
+            try
+            {
+                connection.Open();
+
+                String query = "";
+
+                if (peticion.Equals("favorito"))
+                {
+                    query = "INSERT INTO Favorito(Album_FK, Usuario_FK) VALUES (@idAlbum, @idUsuario)";
+                }
+                else if (peticion.Equals("like"))
+                {
+                    query = "INSERT INTO MeGusta(Album_FK, Usuario_FK) VALUES (@idAlbum, @idUsuario)";
+                }
+               
+                SqlCommand command = new SqlCommand(query, connection);
+                
+                command.Parameters.AddWithValue("@idAlbum", idAlbum);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+
     public void insertarCancion(String nombre, String estado, String album, String ruta)
     {
         {
