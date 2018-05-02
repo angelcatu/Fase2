@@ -202,8 +202,6 @@ public class Modificacion
     }
 
     public int obtenerFavLikeAlbum(String idAlbum, String peticion, String idUsuario)
-
-
     {
         {
             //Crear un objeto de tipo conexión
@@ -349,6 +347,63 @@ public class Modificacion
             {
                 Console.WriteLine(e.ToString());
                 return null;
+            }
+        }
+    }
+
+    public int obtenerFavLikeCancion(string idCancion, string idUsuario, String peticion)
+
+    {
+        {
+
+            //Crear un objeto de tipo conexión
+            SqlConnection conexion = Conexion.conectar();
+
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+
+                //Consulta sql para obtener la contraseña
+                String accion = "";
+
+                if (peticion.Equals("favorito"))
+                {
+                    accion = "Select Favorito.Cancion_FK from Favorito where Favorito.Cancion_FK = @idCancion and Favorito.Usuario_FK = @idUsuario";                    
+                }
+                else if (peticion.Equals("like"))
+                {
+                    accion = "Select MeGusta.Cancion_FK from MeGusta where MeGusta.Cancion_FK = @idCancion and MeGusta.Usuario_FK = @idUsuario";
+                }                
+
+                //select * from login where IdUsuario =‘buhoos’ and PWDCOMPARE(‘12345678’, contrasenia)= 1
+
+                //Crear un objeto de tipo SqlCommand y enviar el String
+
+                SqlCommand comando = new SqlCommand(accion, conexion);
+
+                //Para agregar un parámetro al Where usuario = @username
+                comando.Parameters.AddWithValue("@idCancion", idCancion);
+                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                //Ejecutar Query
+                try
+                {
+                    int estado = Convert.ToInt32(comando.ExecuteScalar());
+                    conexion.Close();
+
+                    return estado;
+                }
+                catch (Exception e)
+                {
+                    conexion.Close();
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return 0;
             }
         }
     }

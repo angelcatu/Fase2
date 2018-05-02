@@ -252,7 +252,7 @@ public class Insersión
             }        
     }
 
-    public void insertarFavMeGustaAlbum(String idAlbum, String peticion, String idUsuario)
+    public void insertarFavMeGustaAlbum(String nombre, String idAlbum, String peticion, String idUsuario)
 
 
     {
@@ -266,7 +266,7 @@ public class Insersión
 
                 if (peticion.Equals("favorito"))
                 {
-                    query = "INSERT INTO Favorito(Album_FK, Usuario_FK) VALUES (@idAlbum, @idUsuario)";
+                    query = "INSERT INTO Favorito(Nombre, Tipo, Album_FK, Usuario_FK, Fav) VALUES (@nombre, 'Album', @idAlbum, @idUsuario, @idAlbum)";
                 }
                 else if (peticion.Equals("like"))
                 {
@@ -274,9 +274,10 @@ public class Insersión
                 }
                
                 SqlCommand command = new SqlCommand(query, connection);
-                
+
+                command.Parameters.AddWithValue("@nombre", nombre);
                 command.Parameters.AddWithValue("@idAlbum", idAlbum);
-                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);                ;
                 try
                 {
                     command.ExecuteNonQuery();
@@ -323,6 +324,49 @@ public class Insersión
                 catch (Exception e)
                 {
 
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+
+    public void insertarFavMeGustaCancion(string nombre, string idCancion, string peticion, string idUsuario)
+    {
+        {
+            SqlConnection connection = Conexion.conectar();
+            try
+            {
+                connection.Open();
+
+                String query = "";
+
+                if (peticion.Equals("favorito"))
+                {
+                    query = "INSERT INTO Favorito(Nombre, Tipo, Cancion_FK, Usuario_FK, Fav) VALUES(@nombre, 'Cancion', @idCancion, @idUsuario, @idCancion)";
+                }
+                else if (peticion.Equals("like"))
+                {
+                    query = "INSERT INTO MeGusta(Cancion_FK, Usuario_FK) VALUES (@idCancion, @idUsuario)";
+                }
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@nombre", nombre);
+                command.Parameters.AddWithValue("@idCancion", idCancion);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);                
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
                     connection.Close();
                 }
             }

@@ -161,6 +161,9 @@ CREATE TABLE Favorito(
 
 IdFavorito INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 
+Nombre VARCHAR (100) NOT NULL,
+Tipo VARCHAR(20) NOT NULL,
+
 Album_FK INT NULL,
 CONSTRAINT IdAlbum_FK FOREIGN KEY(Album_FK) REFERENCES Album(IdAlbum),
 
@@ -170,7 +173,12 @@ CONSTRAINT IdCancionFavorito_FK FOREIGN KEY(Cancion_FK) REFERENCES Cancion(IdCan
 Usuario_FK INT NOT NULL,
 CONSTRAINT IdUsuarioFavorito FOREIGN KEY(Usuario_FK) REFERENCES Usuario(IdUsuario),
 
+Fav INT NOT NULL,
+
 );
+
+drop table Favorito;
+drop table MeGusta;
 
 CREATE TABLE MeGusta(
 IdLike INT NOT NULL IDENTITY(1,1) PRIMARY KEY,

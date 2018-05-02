@@ -182,30 +182,110 @@ Select Cancion.Ruta from Cancion where IdCancion = ;
 
 <-- Consultas de Fav & Like -->
 
-
+select * from Album;
 Select * from Favorito;
 Select * from MeGusta;
-select * from Album;
 select * from Usuario;
 
 
 drop table Favorito;
 drop table MeGusta;
 
+
+
 SELECT MeGusta.Album_FK from MeGusta where MeGusta.Album_FK = 5 and MeGusta.Usuario_FK = 18;
+
 
 Delete from MeGusta where IdLike = 3 and Usuario_FK = 18 ;
 
 INSERT INTO Favorito(Album_FK) VALUES (5);
 INSERT INTO MeGusta(Album_FK) VALUES (4);
 
+
+<-- Consulta albumes con más likes con su artista -->
+
+Select Album.Titulo, Count(MeGusta.IdLike) as Mas_Likes from Album inner join MeGusta on 
+Album.IdAlbum = MeGusta.Album_FK group by Album.Titulo, MeGusta.IdLike;
+
+Select Cancion.Cancion, Count(Favorito.IdFavorito) as Cantidad_de_favoritos , Usuario.IdUsuario, Album.Titulo from Cancion inner join Favorito on
+Cancion.IdCancion = Favorito.Cancion_FK inner join Usuario on Favorito.Usuario_FK = Usuario.IdUsuario inner join Album on Cancion.Album_FK = Album.IdAlbum
+group by Cancion.Cancion, Favorito.IdFavorito, Usuario.IdUsuario, Album.Titulo;
+
+Select Cancion.Cancion, Favorito.Tipo, Count(Favorito.Cancion_FK) as CantidadFavfrom from Favorito  
+inner join Cancion on Favorito.Cancion_FK = Cancion.IdCancion 
+group by Cancion.Cancion, Favorito.Tipo, Favorito.Cancion_FK;
+
+Select Album.Titulo, Favorito.Tipo, Count(Favorito.Album_FK) as CantidadFav from Favorito  
+inner join Album on Favorito.Album_FK = Album.IdAlbum
+group by Album.Titulo, Favorito.Tipo, Favorito.Album_FK;
+
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+
+<--Consulta para administrador: mostrar los favoritos agregados independientemente -->
+
+Select Favorito.Nombre, Favorito.Tipo, Count(Favorito.Fav) as CantidadDeFavs from Favorito 
+group by Favorito.Nombre, Favorito.Tipo, Favorito.Fav order by Count(Favorito.Fav) DESC;
+<------------------------------------------------------------------------------------------------------------>
+
+<--Cantidad de me gusta por album   (Albumes populares)------------------------------------------------------>
+Select Album.Titulo, Count(MeGusta.Album_FK) as MeGustaPorAlbum from Album 
+inner join MeGusta on Album.IdAlbum = MeGusta.Album_FK 
+group by Album.Titulo, MeGusta.Album_FK order by MeGustaPorAlbum desc;
+
+<---------------------------------------------------------------------------------------->
+
+<--Consulta para administrador: mostrar los artistas con más me gusta en canciones (Artistas influyentes y administrador)-->
+Select Artista.NombreArtista, Count(Artista.NombreArtista) as Cantidad_de_MeGusta from Artista
+inner join Album on Artista.IdArtista = Album.Artista_FK 
+inner join Cancion on Album.IdAlbum = Cancion.Album_FK
+inner join MeGusta on Cancion.IdCancion = MeGusta.Cancion_FK
+group by Artista.NombreArtista order by Cantidad_de_MeGusta desc;
+
+<---------------------------------------------------------------------------------------->
+<--Mostrar el resultado de los artistas y sus canciones con más likes en orden (Artistas influyentes)---->
+Select Cancion.Cancion, Count(MeGusta.Cancion_FK) as me_gusta from Cancion 
+inner join Album on Cancion.Album_FK = Album.IdAlbum
+inner join Artista on Album.Artista_FK = Artista.IdArtista
+inner join MeGusta on Cancion.IdCancion = MeGusta.Cancion_FK 
+where Artista.IdArtista = 4
+group by Cancion.Cancion, MeGusta.Cancion_FK order by me_gusta desc;
+
+<---------------------------------------------------------------------------------------->
+
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------>
+<------------------------------------------------------------------------------------------------------------><------------------------------------------------------------------------------------------------------------>
+
+Select * from Artista;
+Select * from Album;
+Select * from Cancion;
+Select * from MeGusta;
+
+
+Select Artista.NombreArtista, MeGusta.Cancion_FK
+
+Select * from Favorito;
+Select * from MeGusta;
+
+
 SELECT Favorito.Album_FK from Favorito where Favorito.Album_FK = 6 and Usuario_FK = 1;
 SELECT MeGusta.Album_FK from MeGusta where MeGusta.Album_FK = 6 and Usuario_FK = 2;
 
 
-INSERT INTO Favorito(Cancion_FK) VALUES ();
+Select Favorito.Cancion_FK from Favorito where Favorito.Cancion_FK = 17 and Favorito.Usuario_FK = 18;
+Select MeGusta.Cancion_FK from MeGusta where MeGusta.Cancion_FK = 10 and MeGusta.Usuario_FK = 20;
 
+Select Favorito.Cancion_FK from Favorito where Favorito.Cancion_FK = 17 and Favorito.Usuario_FK = 18;
 
-
-drop table Favorito;
-drop table MeGusta;
+Delete from Favorito where Favorito.IdFavorito = 8;

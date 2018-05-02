@@ -295,9 +295,10 @@
             </tr>
             <tr>
                 <td class="auto-style17">
-                    <asp:Label ID="lbCanciones" runat="server" Text="Canciones:" Visible="False"></asp:Label>
+                    <asp:Label ID="lbCanciones" runat="server" Text="Canciones:" Visible="False"></asp:Label>                    
                 </td>
-                <td class="auto-style12">&nbsp;</td>
+                <td class="auto-style12">
+                    &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -306,10 +307,12 @@
                         <tr>
                             <td>&nbsp;</td>
                             <td class="auto-style9">
-                                <asp:GridView ID="gridResultCancion" runat="server" CellPadding="4" CssClass="auto-style8" ForeColor="#333333" GridLines="None" OnRowDeleting="gridResultCancion_RowDeleting" Width="368px">
+                                <asp:GridView ID="gridResultCancion" runat="server" CellPadding="4" CssClass="auto-style8" ForeColor="#333333" GridLines="None" OnRowDeleting="gridResultCancion_RowDeleting" Width="368px" OnRowCancelingEdit="gridResultCancion_RowCancelingEdit" OnRowUpdating="gridResultCancion_RowUpdating">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <Columns>
                                         <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Cancel" Text="Favorito" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Update" Text="Me gusta" />
                                     </Columns>
                                     <EditRowStyle BackColor="#999999" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -328,10 +331,12 @@
                 </td>
                 <td class="auto-style20"></td>
                 <td class="auto-style16">
-                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px">
+                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px" OnRowCancelingEdit="gridVerCanciones_RowCancelingEdit" OnRowUpdating="gridVerCanciones_RowUpdating1" >
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <Columns>
-                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />                                                                                
+                                        <asp:ButtonField ButtonType="Button" CommandName="Cancel" ImageUrl="~/Imagenes/estrella.png" Text="Favorito" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Update" Text="Me gusta" />
                                     </Columns>
                                     <EditRowStyle BackColor="#999999" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

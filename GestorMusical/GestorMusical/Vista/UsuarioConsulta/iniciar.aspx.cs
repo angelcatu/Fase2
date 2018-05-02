@@ -15,16 +15,16 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
 
-        if(txtBusqueda.Text.Length > 0)
+        if (txtBusqueda.Text.Length > 0)
         {
             buscarCoincidencias(txtBusqueda.Text);
-        }        
+        }
     }
 
     private void buscarCoincidencias(String busqueda)
@@ -40,7 +40,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         SqlConnection conexion = Conexion.conectar();
 
-        String query = "Select Artista.IdArtista, Artista.NombreArtista from Artista Where Artista.NombreArtista like '%"+artista+"%'" +
+        String query = "Select Artista.IdArtista, Artista.NombreArtista from Artista Where Artista.NombreArtista like '%" + artista + "%'" +
             " AND Artista.Estado_FK = 1";
 
 
@@ -60,7 +60,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         SqlConnection conexion = Conexion.conectar();
 
-        String query = "Select Album.IdAlbum, Album.Titulo from Album Where Album.Titulo like '%"+album+"%'" +
+        String query = "Select Album.IdAlbum, Album.Titulo from Album Where Album.Titulo like '%" + album + "%'" +
             " AND Album.Estado_FK = 1";
 
 
@@ -80,7 +80,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         SqlConnection conexion = Conexion.conectar();
 
-        String query = "Select Cancion.IdCancion, Cancion.Cancion from Cancion Where Cancion.Cancion like '%"+cancion+"%'" +
+        String query = "Select Cancion.IdCancion, Cancion.Cancion from Cancion Where Cancion.Cancion like '%" + cancion + "%'" +
             " AND Cancion.Estado_FK = 1";
 
 
@@ -97,21 +97,21 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     protected void gridResultArtista_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         Modificacion modificacion = new Modificacion();
-        int fila = e.RowIndex;        
+        int fila = e.RowIndex;
         String idArtista = gridResultArtista.Rows[fila].Cells[1].Text;
-                            
+
         mostrarAlbumArtista(Convert.ToInt32(idArtista));
 
     }
 
     private void mostrarAlbumArtista(int idArtista)
     {
-        
+
         SqlConnection conexion = Conexion.conectar();
-        
-        String query = "Select Album.IdAlbum, Album.Titulo, Album.Reseña, Album.FechaCreacion from Album inner join Artista on "+
-            "Album.Artista_FK = Artista.IdArtista "+
-            "WHERE Artista.IdArtista =" + idArtista +"AND Album.Estado_FK = 1 " ;
+
+        String query = "Select Album.IdAlbum, Album.Titulo, Album.Reseña, Album.FechaCreacion from Album inner join Artista on " +
+            "Album.Artista_FK = Artista.IdArtista " +
+            "WHERE Artista.IdArtista =" + idArtista + "AND Album.Estado_FK = 1 ";
 
 
         SqlCommand consulta = new SqlCommand(string.Format(query), conexion);
@@ -138,12 +138,12 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         String portada = modificacion.mostrarDatosDeAlbum(idArtista.ToString(), nombreAlbum, "portada");
 
-        if(idArtista != 0)
+        if (idArtista != 0)
         {
             mostrarCanciones(idAlbum, portada, nombreAlbum);
         }
 
-        
+
     }
 
     protected void gridResultAlbum_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -173,8 +173,8 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         lbTituloAlbum.Text = nombreAlbum;
         lbCanciones.Visible = true;
 
-        actualizarEmoticons(idAlbum.ToString());        
-                
+        actualizarEmoticons(idAlbum.ToString());
+
         SqlConnection conexion = Conexion.conectar();
 
         String query = "Select Cancion.IdCancion, Cancion.Cancion, Cancion.Album_FK from Cancion inner join Album on " +
@@ -225,19 +225,20 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
     protected void gridResultCancion_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int fila = e.RowIndex;        
-        String idCancion = gridResultCancion.Rows[fila].Cells[1].Text;
+        int fila = e.RowIndex;
+        String idCancion = gridResultCancion.Rows[fila].Cells[3].Text;
 
+        
         String ruta = modificacion.obtenerRutaCancion(idCancion);
 
         reproducir(ruta);
-                
+
     }
- 
+
     protected void gridVerCanciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int fila = e.RowIndex;
-        String idCancion = gridVerCanciones.Rows[fila].Cells[1].Text;
+        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
 
         String ruta = modificacion.obtenerRutaCancion(idCancion);
 
@@ -258,17 +259,28 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
     protected void btnFav_Click(object sender, ImageClickEventArgs e)
     {
-        insertarFavoritoMeGusta("favorito");        
+        insertarFavoritoMeGusta("favorito");
+    }
+
+    protected void favCancion_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script>window.alert('Ya es tu favorito');</script>");
+    }
+
+    protected void likeCancion_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script>window.alert('Ya te gusta');</script>");
     }
 
     private void insertarFavoritoMeGusta(String peticion)
     {
         int idAlbum = album_connect.getIdAlbum();
+        String titulo = lbTituloAlbum.Text;
 
         Insersión insertar = new Insersión();
         try
         {
-            insertar.insertarFavMeGustaAlbum(idAlbum.ToString(), peticion, usuario.getId().ToString());            
+            insertar.insertarFavMeGustaAlbum(titulo, idAlbum.ToString(), peticion, usuario.getId().ToString());            
             actualizarEmoticons(idAlbum.ToString());
 
         }
@@ -276,5 +288,109 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         {
 
         }        
+    }
+
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void gridVerCanciones_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        int fila = e.RowIndex;
+        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+
+        int idCancionSqlConvert = Convert.ToInt32(idCancion);
+
+        int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "favorito");
+
+        if (idCancionSql == idCancionSqlConvert)
+        {
+            Response.Write("<script>window.alert('Ya es tu favorito');</script>");
+        }
+        else
+        {
+            insertarFavoritoMeGustaCancion(nombre, "favorito", idCancion);            
+        }
+
+        
+
+    }    
+
+   
+
+    protected void gridResultCancion_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        int fila = e.RowIndex;
+        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        int idCancionSqlConvert = Convert.ToInt32(idCancion);
+        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+
+        int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "favorito");
+
+        if (idCancionSql == idCancionSqlConvert)
+        {
+            Response.Write("<script>window.alert('Ya es tu favorito');</script>");
+        }
+        else
+        {
+            insertarFavoritoMeGustaCancion(nombre, "favorito", idCancion);            
+        }
+    }
+
+    protected void gridResultCancion_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        int fila = e.RowIndex;
+        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        int idCancionSqlConvert = Convert.ToInt32(idCancion);
+        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+
+        int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "like");
+
+        if (idCancionSql == idCancionSqlConvert)
+        {
+            Response.Write("<script>window.alert('Ya te gusta la canción');</script>");
+        }
+        else
+        {
+            insertarFavoritoMeGustaCancion(nombre, "like", idCancion);            
+        }
+    }
+
+    private void insertarFavoritoMeGustaCancion(String nombre, String peticion, String idCancion)
+    {
+        Insersión insertar = new Insersión();
+        try
+        {
+            insertar.insertarFavMeGustaCancion(nombre, idCancion, peticion, usuario.getId().ToString());
+            Response.Write("<script>window.alert('¡Hecho!');</script>");
+        }
+        catch (Exception e)
+        {
+            Response.Write("<script>window.alert('Error: Ocurrió un problema en la acción');</script>");
+        }
+    }   
+
+    protected void gridVerCanciones_RowUpdating1(object sender, GridViewUpdateEventArgs e)
+    {
+        int fila = e.RowIndex;
+        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+
+        int idCancionSqlConvert = Convert.ToInt32(idCancion);
+
+        int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "like");
+
+        if (idCancionSql == idCancionSqlConvert)
+        {
+            Response.Write("<script>window.alert('Ya te gusta la canción');</script>");
+        }
+        else
+        {
+            insertarFavoritoMeGustaCancion(nombre, "like", idCancion);
+        }
     }
 }
