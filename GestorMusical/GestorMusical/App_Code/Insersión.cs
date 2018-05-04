@@ -447,5 +447,40 @@ public class Insersión
             }
         }
     }
+
+    public void agregarComentario(string comentario, string idAlbum, string idUsuario)
+    {
+        {
+            SqlConnection connection = Conexion.conectar();
+            try
+            {
+                connection.Open();
+
+                String query = "Insert into Comentario (Comentario, Album_FK, Usuario_FK) values (@comentario , @idAlbum, @idUsuario)";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@comentario", comentario);
+                command.Parameters.AddWithValue("@idAlbum", idAlbum);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
 }
     

@@ -15,7 +15,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
@@ -23,6 +23,18 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         if (txtBusqueda.Text.Length > 0)
         {
+            lbTituloAlbum.Visible = false;
+            imgPortada.Visible = false;
+            btnFav.Visible = false;
+            btnLike.Visible = false;
+
+            gridComentarios.Visible = false;
+            btnComentar.Visible = false;
+            lbComentario.Visible = false;
+            txtComentario.Visible = false;
+
+            gridVerCanciones.Visible = false;
+
             buscarCoincidencias(txtBusqueda.Text);
         }
     }
@@ -37,6 +49,8 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     private void buscarArtista(String artista)
     {
         lbArtista.Visible = true;
+
+        gridResultArtista.Visible = true;
 
         SqlConnection conexion = Conexion.conectar();
 
@@ -57,7 +71,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     private void buscarAlbum(String album)
     {
         lbAlbumes.Visible = true;
-
+        gridResultAlbum.Visible = true;
         SqlConnection conexion = Conexion.conectar();
 
         String query = "Select Album.IdAlbum, Album.Titulo from Album Where Album.Titulo like '%" + album + "%'" +
@@ -77,6 +91,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     private void buscarCancion(String cancion)
     {
         lbCanciones.Visible = true;
+        gridResultCancion.Visible = true;
 
         SqlConnection conexion = Conexion.conectar();
 
@@ -106,8 +121,10 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
     private void mostrarAlbumArtista(int idArtista)
     {
+        gridVerAlbum.Visible = true;
 
         SqlConnection conexion = Conexion.conectar();
+
 
         String query = "Select Album.IdAlbum, Album.Titulo, Album.Reseña, Album.FechaCreacion from Album inner join Artista on " +
             "Album.Artista_FK = Artista.IdArtista " +
@@ -140,7 +157,21 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         if (idArtista != 0)
         {
-            mostrarCanciones(idAlbum, portada, nombreAlbum);
+            lbAlbumes.Visible = false;
+            lbCanciones.Visible = false;
+            lbArtista.Visible = false;
+            gridResultArtista.Visible = false;
+            gridResultAlbum.Visible = false;
+            gridVerAlbum.Visible = false;
+            gridResultCancion.Visible = false;
+
+            gridComentarios.Visible = true;
+            btnComentar.Visible = true;
+            lbComentario.Visible = true;
+            txtComentario.Visible = true;
+
+            actualizarGridComentarios(idAlbum.ToString());
+            mostrarCanciones(idAlbum, portada, nombreAlbum);            
         }
 
 
@@ -162,6 +193,20 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         if (idArtista != 0)
         {
+            lbAlbumes.Visible = false;
+            lbCanciones.Visible = false;
+            lbArtista.Visible = false;
+            gridResultArtista.Visible = false;
+            gridResultAlbum.Visible = false;
+            gridVerAlbum.Visible = false;
+            gridResultCancion.Visible = false;
+
+            gridComentarios.Visible = true;
+            btnComentar.Visible = true;
+            lbComentario.Visible = true;
+            txtComentario.Visible = true;
+
+            actualizarGridComentarios(idAlbum.ToString());
             mostrarCanciones(idAlbum, portada, nombreAlbum);
         }
     }
@@ -171,7 +216,12 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 
         imgPortada.ImageUrl = portada;
         lbTituloAlbum.Text = nombreAlbum;
+        lbIdAlbum.Text = idAlbum.ToString();
+
         lbCanciones.Visible = true;
+        lbTituloAlbum.Visible = true;
+        imgPortada.Visible = true;
+        gridVerCanciones.Visible = true;
 
         actualizarEmoticons(idAlbum.ToString());
 
@@ -392,5 +442,48 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         {
             insertarFavoritoMeGustaCancion(nombre, "like", idCancion);
         }
+    }
+
+    protected void btnComentar_Click(object sender, EventArgs e)
+    {
+        String idAlbum = lbIdAlbum.Text;
+        agregarComentario(txtComentario.Text, idAlbum);
+        actualizarGridComentarios(idAlbum);
+    }
+
+    private void agregarComentario(string comentario, String idAlbum)
+    {
+        Insersión insertarComentario = new Insersión();
+        try
+        {
+            insertarComentario.agregarComentario(comentario, idAlbum, usuario.getId().ToString());
+            Response.Write("<script>window.alert('Has comentado');</script>");
+        }
+        catch(Exception err)
+        {
+            Response.Write("<script>window.alert('No se pudo comentar el álbum');</script>");
+        }        
+
+    }
+
+    private void actualizarGridComentarios(String idAlbum)
+    {
+        gridComentarios.Visible = true;
+
+        SqlConnection conexion = Conexion.conectar();
+
+
+        String query = "Select Usuario.Username, Comentario.Comentario from Usuario "+
+                "inner join Comentario on Usuario.IdUsuario = Comentario.Usuario_FK where Comentario.Album_FK = " +Convert.ToInt32(idAlbum);
+
+
+        SqlCommand consulta = new SqlCommand(string.Format(query), conexion);
+        SqlDataAdapter da = new SqlDataAdapter(consulta);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+
+        gridComentarios.DataSource = dt;
+        gridComentarios.DataBind();
+        conexion.Close();
     }
 }

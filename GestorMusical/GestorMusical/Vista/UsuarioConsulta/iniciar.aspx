@@ -47,9 +47,6 @@
         .auto-style12 {
             width: 195px;
         }
-        .auto-style13 {
-            text-align: center;
-        }
         .auto-style14 {
             width: 594px;
             height: 155px;
@@ -75,6 +72,32 @@
         }
         .auto-style21 {
             width: 39px;
+        }
+        .auto-style22 {
+            width: 147px;
+        }
+        .auto-style23 {
+            width: 96%;
+        }
+        .auto-style24 {
+            width: 98px;
+        }
+        .auto-style25 {
+            width: 15px;
+        }
+        .auto-style26 {
+            width: 100%;
+            margin-right: 10;
+        }
+        .auto-style27 {
+            width: 230%;
+        }
+        .auto-style28 {
+            width: 323px;
+            text-align: right;
+        }
+        .auto-style29 {
+            text-align: right;
         }
     </style>
     </head>
@@ -191,10 +214,31 @@
                     </table>
                 </td>
                 <td class="auto-style12">
-                    <table class="auto-style1">
+                    <table class="auto-style23">
                         <tr>
-                            <td class="auto-style13">&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td class="auto-style24">
+                                <asp:Label ID="lbTituloAlbum" runat="server"></asp:Label>
+                            </td>
+                            <td class="auto-style25">&nbsp;</td>
+                            <td class="auto-style22">
+                                <asp:Label ID="lbIdAlbum" runat="server" Visible="False"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style24">
+                    <asp:Image ID="imgPortada" runat="server" Height="93px" Width="93px" />
+                            </td>
+                            <td class="auto-style25">
+                                <asp:ImageButton ID="btnLike" runat="server" Height="38px" ImageUrl="~/Imagenes/like_vacio.png" OnClick="btnLike_Click" Visible="False" Width="42px" />
+                            </td>
+                            <td class="auto-style22">
+                                <asp:ImageButton ID="btnFav" runat="server" Height="44px" ImageUrl="~/Imagenes/estrella_vacio.png" OnClick="btnFav_Click" Visible="False" Width="44px" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style24">&nbsp;</td>
+                            <td class="auto-style25">&nbsp;</td>
+                            <td class="auto-style22">&nbsp;</td>
                         </tr>
                     </table>
                 </td>
@@ -219,7 +263,26 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style12">&nbsp;</td>
+                <td class="auto-style12">
+                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px" OnRowCancelingEdit="gridVerCanciones_RowCancelingEdit" OnRowUpdating="gridVerCanciones_RowUpdating1" >
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <Columns>
+                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />                                                                                
+                                        <asp:ButtonField ButtonType="Button" CommandName="Cancel" ImageUrl="~/Imagenes/estrella.png" Text="Favorito" />
+                                        <asp:ButtonField ButtonType="Button" CommandName="Update" Text="Me gusta" />
+                                    </Columns>
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
+                            </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -231,7 +294,7 @@
             </tr>
             <tr>
                 <td class="auto-style14">
-                    <table class="auto-style1">
+                    <table class="auto-style26">
                         <tr>
                             <td>&nbsp;</td>
                             <td class="auto-style7">
@@ -256,7 +319,30 @@
                     </table>
                 </td>
                 <td class="auto-style15">
-                    &nbsp;</td>
+                    <table class="auto-style27">
+                        <tr>
+                            <td class="auto-style28">
+                                <table class="auto-style1">
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lbComentario" runat="server" Text="Comentario" Visible="False"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtComentario" runat="server" Height="71px" TextMode="MultiLine" Visible="False" Width="314px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style28">
+                                <asp:Button ID="btnComentar" runat="server" OnClick="btnComentar_Click" Text="Comentar" Visible="False" />
+                            </td>
+                            <td class="auto-style29">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
                 <td class="auto-style16">
                     <table class="auto-style1">
                         <tr>
@@ -269,26 +355,36 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style12">&nbsp;</td>
+                <td class="auto-style12">
+                    <asp:GridView ID="gridComentarios" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="445px">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                        <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                    </asp:GridView>
+                </td>
                 <td>
                     <table class="auto-style1">
                         <tr>
                             <td class="auto-style18">
-                                <asp:Label ID="lbTituloAlbum" runat="server"></asp:Label>
-                            </td>
+                                &nbsp;</td>
                             <td class="auto-style21">&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="auto-style18">
-                    <asp:Image ID="imgPortada" runat="server" Height="93px" Width="93px" />
-                            </td>
+                                &nbsp;</td>
                             <td class="auto-style21">
-                                <asp:ImageButton ID="btnLike" runat="server" Height="38px" ImageUrl="~/Imagenes/like_vacio.png" OnClick="btnLike_Click" Visible="False" Width="42px" />
-                            </td>
+                                &nbsp;</td>
                             <td>
-                                <asp:ImageButton ID="btnFav" runat="server" Height="44px" ImageUrl="~/Imagenes/estrella_vacio.png" OnClick="btnFav_Click" Visible="False" Width="44px" />
-                            </td>
+                                &nbsp;</td>
                         </tr>
                     </table>
                 </td>
@@ -331,25 +427,12 @@
                 </td>
                 <td class="auto-style20"></td>
                 <td class="auto-style16">
-                                <asp:GridView ID="gridVerCanciones" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleting="gridVerCanciones_RowDeleting" Width="356px" OnRowCancelingEdit="gridVerCanciones_RowCancelingEdit" OnRowUpdating="gridVerCanciones_RowUpdating1" >
-                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                                    <Columns>
-                                        <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Reproducir" />                                                                                
-                                        <asp:ButtonField ButtonType="Button" CommandName="Cancel" ImageUrl="~/Imagenes/estrella.png" Text="Favorito" />
-                                        <asp:ButtonField ButtonType="Button" CommandName="Update" Text="Me gusta" />
-                                    </Columns>
-                                    <EditRowStyle BackColor="#999999" />
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                                </asp:GridView>
-                            </td>
+                                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style12">&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
