@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 
+
 public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 {
 
@@ -157,6 +158,9 @@ public partial class Vista_UsuarioConsulta_modificarAlbum : System.Web.UI.Page
 
         Eliminacion eliminarCancion = new Eliminacion();
         //Eliminar canción de la DB
+        eliminarCancion.eliminarDeLista(valor);
+        eliminarCancion.eliminarDeFavorito(valor);
+        eliminarCancion.eliminarDeMegusta(valor);
         eliminarCancion.eliminarCancionDefinitivo(valor);
         fila = 0;
 

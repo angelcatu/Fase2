@@ -51,6 +51,48 @@ public class Insersión
         }
     }
 
+    public void publicarNoticia(string titulo, string contenido, string portada, string idUsuario)
+
+    {
+
+        {
+            SqlConnection connection = Conexion.conectar();
+
+            try
+            {
+                connection.Open();
+
+                String query = "Insert into Novedad(TituloDePortada, Contenido, FotoPortada, Usuario_FK) values(@titulo, @contenido, @portada, @idUsuario);";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@titulo", titulo);
+                command.Parameters.AddWithValue("@contenido", contenido);
+                command.Parameters.AddWithValue("@portada", portada);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+
     public void registarUsuarioAdmin(String nombre, String fecha, String correo, String rol, String user, String pass, String estado)
     {
 

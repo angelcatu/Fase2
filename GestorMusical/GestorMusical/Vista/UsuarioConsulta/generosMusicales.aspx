@@ -50,12 +50,15 @@
     <header>
         <nav id="menuTop">
         <ul>
-            <li class="nivel1"><a href="#">Explorar</a>                
+             <li class="nivel1"><a href="iniciar.aspx">Explorar</a>                
                         <ul>
                             <li class ="nivel2"><a href="generosMusicales.aspx">Generos</a></li>                            
                             <li class ="nivel2"><a href="listasDeReproduccion.aspx">Listas de reproducción</a></li>
+                            <li class ="nivel2"><a href="novedades.aspx">Novedades</a></li>                            
+                            <li class ="nivel2"><a href="tendencias.aspx">Tendencias</a></li>
+                            <li class ="nivel2"><a href="favoritos.aspx">Favoritos</a></li>
                         </ul>                                                                                                    
-            </li>
+              </li>
             
             <li class="nivel1"><a href="#">Registros</a>
                 <ul>

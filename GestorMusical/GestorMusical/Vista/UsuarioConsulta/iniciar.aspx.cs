@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Media;
+using WMPLib;
 
 public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
 {
@@ -296,10 +298,23 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     }
 
     private void reproducir(String ruta)
-    {
-        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-        player.SoundLocation = ruta;
-        player.Play();
+    {        
+        try
+        {
+
+            WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
+            mediaPlayer.URL = ruta;
+            mediaPlayer.controls.play();            
+            
+            //SoundPlayer player = new SoundPlayer();
+            //player.SoundLocation = ruta;
+            //player.Play();            
+
+        }
+        catch(Exception err)
+        {
+            Response.Write("<script>window.alert('Error: no se puede reproducir el archivo o no existe');</script>");
+        }        
     }
 
     protected void btnLike_Click(object sender, ImageClickEventArgs e)
@@ -375,9 +390,9 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     protected void gridResultCancion_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         int fila = e.RowIndex;
-        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        String idCancion = gridResultCancion.Rows[fila].Cells[3].Text;
         int idCancionSqlConvert = Convert.ToInt32(idCancion);
-        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+        String nombre = gridResultCancion.Rows[fila].Cells[4].Text;
 
         int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "favorito");
 
@@ -394,9 +409,9 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
     protected void gridResultCancion_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
         int fila = e.RowIndex;
-        String idCancion = gridVerCanciones.Rows[fila].Cells[3].Text;
+        String idCancion = gridResultCancion.Rows[fila].Cells[3].Text;
         int idCancionSqlConvert = Convert.ToInt32(idCancion);
-        String nombre = gridVerCanciones.Rows[fila].Cells[4].Text;
+        String nombre = gridResultCancion.Rows[fila].Cells[4].Text;
 
         int idCancionSql = modificacion.obtenerFavLikeCancion(idCancionSqlConvert.ToString(), usuario.getId().ToString(), "like");
 
@@ -449,6 +464,7 @@ public partial class Vista_UsuarioConsulta_iniciar : System.Web.UI.Page
         String idAlbum = lbIdAlbum.Text;
         agregarComentario(txtComentario.Text, idAlbum);
         actualizarGridComentarios(idAlbum);
+        txtComentario.Text = "";
     }
 
     private void agregarComentario(string comentario, String idAlbum)

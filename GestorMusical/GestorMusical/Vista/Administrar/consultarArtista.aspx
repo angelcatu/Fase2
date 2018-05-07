@@ -32,11 +32,12 @@
     <header>
      <nav id="menuTop">
         <ul>
-            <li class="nivel1"><a href="#">Inicio</a></li>
+            <li class="nivel1"><a href="/Vista/Administrador.aspx">Inicio</a></li>
             <li class="nivel1"><a href="#">Gestionar</a>
                 <ul>
                     <li class="nivel2"><a href="crearUsuario.aspx">Crear usuario</a> </li>
-                    <li class="nivel2"><a href="buscarUsuario.aspx">Modificar usuario</a></li>                    
+                    <li class="nivel2"><a href="buscarUsuario.aspx">Modificar usuario</a></li>           
+                    <li class="nivel2"><a href="crearNovedad.aspx">Noticia</a></li>          
                 </ul>                            
             </li>                
             <li class="nivel1"><a href="#">Consultas</a>

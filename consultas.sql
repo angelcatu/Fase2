@@ -234,9 +234,24 @@ group by Favorito.Nombre, Favorito.Tipo, Favorito.Fav order by Count(Favorito.Fa
 <------------------------------------------------------------------------------------------------------------>
 
 <--Cantidad de me gusta por album   (Albumes populares)------------------------------------------------------>
-Select Album.Titulo, Count(MeGusta.Album_FK) as MeGustaPorAlbum from Album 
+Select  Album.Titulo, Count(MeGusta.Album_FK) as MeGustaPorAlbum from Album
 inner join MeGusta on Album.IdAlbum = MeGusta.Album_FK 
 group by Album.Titulo, MeGusta.Album_FK order by MeGustaPorAlbum desc;
+
+
+select * from Favorito;
+Select * from Cancion_Lista;
+select * from Cancion;
+Select * from Favorito where Favorito.Cancion_FK = 24;
+Select * from MeGusta where MeGusta.Cancion_FK = 24;
+
+Delete from MeGusta where MeGusta.Cancion_FK = 27;
+
+Select Favorito.Nombre from Favorito where Usuario_FK = 13;
+
+Delete from Cancion where Cancion.IdCancion = 11;
+Delete from Cancion_Lista where Cancion_Lista.Cancion_FK = ;
+
 
 <---------------------------------------------------------------------------------------->
 
@@ -260,7 +275,13 @@ group by Cancion.Cancion, MeGusta.Cancion_FK order by me_gusta desc;
 
 <------------------------------------------------------------------------------------------------------------>
 <------------------------------------------------------------------------------------------------------------>
-<------------------------------------------------------------------------------------------------------------>
+<---------------------------Novedades--------------------------------------------------------------------------------->
+
+Select * from Novedad;
+Select Novedad.TituloDePortada, Novedad.Contenido, Novedad.FotoPortada from Novedad;
+Insert into Novedad(TituloDePortada, Contenido, FotoPortada, Usuario_FK) values();
+
+
 <------------------------------------------------------------------------------------------------------------>
 <------------------------------------------------------------------------------------------------------------>
 <------------------------------------------------------------------------------------------------------------>

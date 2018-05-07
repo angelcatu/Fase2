@@ -108,12 +108,15 @@
     <header>
         <nav id="menuTop">
         <ul>
-            <li class="nivel1"><a href="#">Explorar</a>                
+           <li class="nivel1"><a href="iniciar.aspx">Explorar</a>                
                         <ul>
                             <li class ="nivel2"><a href="generosMusicales.aspx">Generos</a></li>                            
                             <li class ="nivel2"><a href="listasDeReproduccion.aspx">Listas de reproducción</a></li>
+                            <li class ="nivel2"><a href="novedades.aspx">Novedades</a></li>                            
+                            <li class ="nivel2"><a href="tendencias.aspx">Tendencias</a></li>
+                            <li class ="nivel2"><a href="favoritos.aspx">Favoritos</a></li>
                         </ul>                                                                                                    
-            </li>
+              </li>
             
             <li class="nivel1"><a href="#">Registros</a>
                 <ul>
@@ -137,8 +140,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nivel1"><a href="#">Listas</a>
-                
+            <li class="nivel1"><a href="#">Listas</a>                
                 <ul>
                     <li class="nivel2">
                         <a href="crearLista.aspx">Crear listas</a>
@@ -149,7 +151,7 @@
                     </li>
                 </ul>
 
-            </li>                         
+            </li>                                            
             <li class="nivel1">
                 <a href="/Vista/Ingresar.aspx">Salir</a>
             </li>

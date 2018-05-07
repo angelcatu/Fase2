@@ -239,6 +239,140 @@ public class Eliminacion
         }
     }
 
+    public void eliminarDeLista(string idCancion)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+
+            String accion = "Delete from Cancion_Lista where Cancion_Lista.Cancion_FK = @idCancion";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idCancion", idCancion);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el usuario");
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
+
+    public void eliminarDeMegusta(string idCancion)
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+
+            String accion = "Delete from MeGusta where MeGusta.Cancion_FK = @idCancion";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idCancion", idCancion);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el usuario");
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
+
+    public void eliminarDeFavorito(string idCancion)
+
+    {
+
+        //Crear un objeto de tipo conexión
+        SqlConnection conexion = Conexion.conectar();
+
+        try
+        {
+            //Abrir la conexion
+            conexion.Open();
+
+            //Consulta sql para obtener la contraseña
+
+            String accion = "Delete from Favorito where Favorito.Cancion_FK = @idCancion";
+
+            //Crear un objeto de tipo SqlCommand y enviar el String
+
+            SqlCommand comando = new SqlCommand(accion, conexion);
+
+            //Para agregar un parámetro al Where usuario = @username
+            comando.Parameters.AddWithValue("@idCancion", idCancion);
+
+            //Ejecutar Query
+            try
+            {
+                comando.ExecuteNonQuery();
+                Console.WriteLine("Se eliminó correctamente el usuario");
+                conexion.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+
+        }
+    }
+
     public void eliminarCancionDefinitivo(String idCancion)
 
     {
@@ -252,6 +386,7 @@ public class Eliminacion
             conexion.Open();
 
             //Consulta sql para obtener la contraseña
+
             String accion = "DELETE FROM Cancion where Cancion.IdCancion = @idCancion";
 
             //Crear un objeto de tipo SqlCommand y enviar el String
